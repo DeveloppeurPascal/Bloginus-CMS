@@ -3,6 +3,8 @@
 
 	$titre_page = "Message envoyé";
 	fichier_inclure("_header.php");
-?><div id="pageContact"><p class="msgInfo">Votre message a bien été envoyé. Nous vous répondrons dès que possible.</p></div><?php
+?><div id="pageContact"><?php
+	print(config_getvar("contact-haut","<p class=\"msgInfo\">Votre message a bien été envoyé. Nous vous répondrons dès que possible.</p>"));
+?></div><?php
 	fichier_inclure("_footer.php");
 ?>

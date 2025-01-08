@@ -4,7 +4,8 @@
 	global $nom,$prenom,$email,$sujet,$message,$msgErreur;
 	$titre_page = "Nous contacter";
 	fichier_inclure("_header.php");
-?><div id="pageContact"><form method="POST"><p class="msgInfo">Pour nous contacter, veuillez remplir ce formulaire :</p><?php
+?><div id="pageContact"><form method="POST"><?php
+	print(config_getvar("contact-haut","<p class=\"msgInfo\">Pour nous contacter, veuillez remplir ce formulaire :</p>"));
 	if ("" != $msgErreur)
 	{
 ?><p class="msgErreur"><?php print(nl2br($msgErreur)); ?></p><?php
@@ -40,6 +41,8 @@
 <p><label for="votretitre">Sujet du message:</label><input type="text" name="sujet" id="votretitre" value="<?php print(htmlentities($sujet,ENT_COMPAT,"UTF-8")); ?>"></p>
 <p><label for="votremessage">Votre message:</label><textarea name="message" id="votremessage"><?php print(htmlentities($message,ENT_COMPAT,"UTF-8")); ?></textarea></p>
 <p><input type="submit" id="btnEnvoyer" value="Envoyer"></p>
-</fieldset></form></div><?php
+</fieldset><?php
+	print(config_getvar("contact-bas"));
+?></form></div><?php
 	fichier_inclure("_footer.php");
 ?>

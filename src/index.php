@@ -1,11 +1,11 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06-06/2015
+	// (c) Patrick Prémartin / Olf Software 06/2014 - 01/2016
 	//
 	// http://www.bloginus-lescript.fr
 	session_start();
 	
-	define('_BloginusVersion_','4');
+	define('_BloginusVersion_','5');
 
 	// nettoyage des paramètres passés au programme
 	if (get_magic_quotes_gpc())

@@ -1,5 +1,7 @@
 RewriteEngine on
-RewriteRule ascreen.jpg ascreen.jpg [L]
 RewriteRule robots.txt robots.txt [L]
+RewriteRule ascreen.jpg ascreen.jpg [L]
 RewriteRule favicon.ico favicon.ico [L]
+RewriteRule favicon.png favicon.png [L]
+RewriteRule apple-touch-icon.png apple-touch-icon.png [L]
 RewriteRule (.*) index.php [L]

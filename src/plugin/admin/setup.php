@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06/2014
+	// (c) Patrick Prémartin / Olf Software 06/2014-07/2015
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -13,6 +13,19 @@
 
 	// création de l'arborescence
 	@mkdir(get_data_path());
+	
+	if (! is_dir(dirname(__FILE__)."/../../temp"))
+	{
+		@mkdir(dirname(__FILE__)."/../../temp");
+		if (! is_dir(dirname(__FILE__)."/../../temp"))
+		{
+			print("<br>création du dossier /temp effectuée");
+		}
+		else
+		{
+			print("<br>erreur : impossible de créer le dossier /temp");
+		}
+	}
 	
 	file_put_contents(get_data_path()."/.htaccess","order deny,allow\r\ndeny from all\r\n");
 	file_put_contents(dirname(__FILE__)."/../../protected/.htaccess","order deny,allow\r\ndeny from all\r\n");

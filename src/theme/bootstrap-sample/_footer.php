@@ -111,4 +111,14 @@
     <script src="<?php print(site_url()); ?>/js/bootstrap.min.js"></script>
     <script src="<?php print(site_url()); ?>/js/ie10-viewport-bug-workaround.js"></script><?php
 	print(config_getvar("stats"));
+	if (defined("HIGHLIGHTJS") && constant("HIGHLIGHTJS"))
+	{
+?><script>
+	$(document).ready(function() {
+	  $('pre code').each(function(i, block) {
+		hljs.highlightBlock(block);
+	  });
+	});
+</script><?php
+	}
 ?></body></html>

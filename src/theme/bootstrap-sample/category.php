@@ -12,7 +12,7 @@
 		}
 		for ($i =0; $i < count($liste); $i++)
 		{
-			?><div class="blog-post"><h2 class="blog-post-title"><?php print(htmlentities($liste[$i]["label"],ENT_COMPAT,"UTF-8")); ?></h2>
+			?><div class="blog-post"><h2 class="blog-post-title"><a href="<?php print(post_url($liste[$i]["id"])); ?>"><?php print(htmlentities($liste[$i]["label"],ENT_COMPAT,"UTF-8")); ?></a></h2>
             <p class="blog-post-meta"><?php print(aaaammjjhhmmss_to_string(date("YmdHis",intval($liste[$i]["timestamp"])))); ?></p><?php print(substr(strip_tags($liste[$i]["text"]),0,255)); ?> (<a href="<?php print(post_url($liste[$i]["id"])); ?>" title="lire la suite">...</a>)</div><?php
 		}
 	}

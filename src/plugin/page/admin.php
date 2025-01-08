@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 08/2014-06/2015
+	// (c) Patrick Prémartin / Olf Software 08/2014-01/2016
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -94,7 +94,7 @@
 		{
 			$id_max = 0;
 			reset($liste);
-			var_dump($liste);
+			// var_dump($liste);
 			while (list($key,$value) = each($liste))
 			{
 				$id = base36_vers_entier($value["id"]);
@@ -161,7 +161,7 @@
 		</select></p>
 		<p>Date de dernière modification : <?php print(aaaammjjhhmmss_to_string(date("YmdHis",intval($page["timestamp"])))); ?></p>
 		<p>URL de cette page : <a href="<?php print(page_url($page_id)); ?>" target="_blank"><?php print(page_url($page_id)); ?></a></p>
-		<p><input type="checkbox" value="X" name="rootpage" id="frmrootpage" <?php print((config_getvar("rooturl")==page_url($page_id))?"checked=\"checked\" ":""); ?>/><input type="hidden" name="rootpageprevious" value="<?php print((config_getvar("rooturl")==page_url($page_id))?"X":""); ?>" /> <label for="frmrootpage">utiliser en page d'accueil du site</label></p>
+		<p><input type="checkbox" value="X" name="rootpage" id="frmrootpage" <?php print((("" != config_getvar("rooturl")) && (config_getvar("rooturl")==page_url($page_id)))?"checked=\"checked\" ":""); ?>/><input type="hidden" name="rootpageprevious" value="<?php print((config_getvar("rooturl")==page_url($page_id))?"X":""); ?>" /> <label for="frmrootpage">utiliser en page d'accueil du site</label></p>
 		<p><input type="submit" value="Enregistrer"></p>
 	</fieldset>
 </form><script type="text/javascript">

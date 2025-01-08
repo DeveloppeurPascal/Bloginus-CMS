@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06-11/2014
+	// (c) Patrick Prémartin / Olf Software 06/2014 - 01/2016
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -181,6 +181,7 @@
 		global $categorie_id, $categorie, $souscategories, $autresarticles, $article_id, $article, $plandusite, $titre_page, $page;
 
 		$theme = config_getvar("theme","_default");
+		// $theme = config_getvar("theme","bootstrap-sample");
 		if (file_exists(dirname(__FILE__)."/../theme/".$theme."/".$nom_fichier))
 		{
 			require_once(dirname(__FILE__)."/../theme/".$theme."/".$nom_fichier);

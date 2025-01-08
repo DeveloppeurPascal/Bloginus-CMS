@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 07/2014
+	// (c) Patrick Prémartin / Olf Software 07/2014 - 01/2016
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -55,7 +55,7 @@
 	while(list($key,$themepropose) = each($theme_liste))
 	{
 		$i++;
-		print("<input type=\"radio\" id=\"theme".$i."\" name=\"theme\" value=\"".htmlentities($themepropose,ENT_COMPAT,"UTF-8")."\"".((config_getvar("theme","_default") == $themepropose)?" checked=\"checked\"":"")."> <label for=\"theme".$i."\">".$themepropose."</label><br />");
+		print("<input type=\"radio\" id=\"theme".$i."\" name=\"theme\" value=\"".htmlentities($themepropose,ENT_COMPAT,"UTF-8")."\"".((config_getvar("theme","bootstrap-sample") == $themepropose)?" checked=\"checked\"":"")."> <label for=\"theme".$i."\">".$themepropose."</label><br />");
 	}
 ?>
 		<p><input type="submit" value="Enregistrer"></p>
