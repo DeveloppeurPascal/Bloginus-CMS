@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06-09/2014
+	// (c) Patrick Prémartin / Olf Software 06/2014-06/2015
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -122,6 +122,14 @@
 			{
 				$msgerreur .= "Une erreur est survenue lors de l'enregistrement de votre saisie. Une désynchronisation est possible au niveau de la liste des articles du feed RSS.\n";
 			}
+			if (isset($_POST["rootpage"]) && ("X" == $_POST["rootpage"]))
+			{
+				config_setvar("rooturl", post_url($article_id));
+			}
+			else if (isset($_POST["rootpageprevious"]) && ("X" == $_POST["rootpageprevious"]))
+			{
+				config_setvar("rooturl", "");
+			}
 		}
 		else
 		{
@@ -231,6 +239,7 @@
 		</select></p>
 		<p>Date de dernière modification : <?php print(aaaammjjhhmmss_to_string(date("YmdHis",intval($article["timestamp"])))); ?></p>
 		<p>URL de sa page : <a href="<?php print(post_url($article_id)); ?>" target="_blank"><?php print(post_url($article_id)); ?></a></p>
+		<p><input type="checkbox" value="X" name="rootpage" id="frmrootpage" <?php print((config_getvar("rooturl")==post_url($article_id))?"checked=\"checked\" ":""); ?>/><input type="hidden" name="rootpageprevious" value="<?php print((config_getvar("rooturl")==post_url($article_id))?"X":""); ?>" /> <label for="frmrootpage">utiliser en page d'accueil du site</label></p>
 		<p><input type="submit" value="Enregistrer"></p>
 	</fieldset>
 </form><script type="text/javascript">

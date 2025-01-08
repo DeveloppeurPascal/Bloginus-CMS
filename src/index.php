@@ -1,11 +1,11 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06-08/2014
+	// (c) Patrick Prémartin / Olf Software 06-06/2015
 	//
 	// http://www.bloginus-lescript.fr
 	session_start();
 	
-	define('_BloginusVersion_','3');
+	define('_BloginusVersion_','4');
 
 	// nettoyage des paramètres passés au programme
 	if (get_magic_quotes_gpc())
@@ -64,7 +64,21 @@
 	{
 		$elem[$key] = trim($value);
 	}
-	if (("" == $elem[0]) || ("index.html" == $elem[0]))
+	if ("" == $elem[0])
+	{
+		$url = config_getvar("rooturl","");
+		if ("" != $url)
+		{
+			header("location: ".$url);
+			exit;
+		}
+		else
+		{
+			$elem[0] = "c";
+			$elem[1] = "_";
+		}
+	}
+	elseif ("index.html" == $elem[0])
 	{
 		$elem[0] = "c";
 		$elem[1] = "_";

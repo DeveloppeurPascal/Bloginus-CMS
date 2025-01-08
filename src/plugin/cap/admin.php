@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 09/2014
+	// (c) Patrick Prémartin / Olf Software 09/2014-06/2015
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -32,6 +32,14 @@
 		$num = 0;
 		$op = substr($op,3);
 		$changement = ("" == $msgErreur);
+		if (isset($_POST["rootpage"]) && ("X" == $_POST["rootpage"]))
+		{
+			config_setvar("rooturl", config_getvar("url")."/cap/");
+		}
+		else if (isset($_POST["rootpageprevious"]) && ("X" == $_POST["rootpageprevious"]))
+		{
+			config_setvar("rooturl", "");
+		}
 	}
 	else if ("chgmerci" == $op)
 	{
@@ -251,6 +259,7 @@
 		<textarea name="autorepondeur_script" id="frmRepScript" cols="80" rows="10"><?php print(htmlentities($cap->autorepondeur_script,ENT_COMPAT,"UTF-8")); ?></textarea></p>
 		<p><label for="frmTxtB">Texte en bas de page</label><br />
 		<textarea class="miseEnForme" name="texte_bas" id="frmTxtB" cols="80" rows="10"><?php print(htmlentities($cap->texte_bas,ENT_COMPAT,"UTF-8")); ?></textarea></p>
+		<p><input type="checkbox" value="X" name="rootpage" id="frmrootpage" <?php print((config_getvar("rooturl")==config_getvar("url")."/cap/")?"checked=\"checked\" ":""); ?>/><input type="hidden" name="rootpageprevious" value="<?php print((config_getvar("rooturl")==config_getvar("url")."/cap/")?"X":""); ?>" /> <label for="frmrootpage">utiliser en page d'accueil du site</label></p>
 		<p><input type="button" onclick="document.formul.op.value='chgsqueeze';document.formul.num.value='0';document.formul.captype.value='<?php print($cap->type); ?>';$('#frm').submit();" value="Enregistrer"> <input type="button" onclick="document.formul.op.value='liste';$('#frm').submit();" value="Annuler"></p>
 	</fieldset><?php
 	}

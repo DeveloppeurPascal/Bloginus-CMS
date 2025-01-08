@@ -61,6 +61,18 @@
 		height: 270px;
 		width: 100%;
 	}
+	.bloc_sqz {
+		width: 100%;
+	}
+	.bloc_sqz td {
+		width: 50%;
+	}
+	.bloc_sqz_gauche {
+		text-align: right;
+	}
+	.bloc_sqz_droite {
+		text-align: left;
+	}
 </style></head><body>
 <table class="haut">
   <tbody>

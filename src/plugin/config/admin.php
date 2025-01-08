@@ -1,12 +1,11 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 07-08/2014
+	// (c) Patrick Prémartin / Olf Software 07/2014-06/2015
 	//
 	// http://www.bloginus-lescript.fr
 
 	$msgerreur = "";
 	$msginfo = "";
-	$titre = "";
 	if (isset($_POST["titre"]))
 	{
 		$titre = trim($_POST["titre"]);
@@ -20,7 +19,6 @@
 			$msgerreur .= "Veuillez renseigner le titre du site.\n";
 		}
 	}
-	$auteur = "";
 	if (isset($_POST["auteur"]))
 	{
 		$auteur = trim($_POST["auteur"]);
@@ -34,7 +32,6 @@
 			$msgerreur .= "Veuillez indiquer qui est l'auteur du site (pour le copyright dans le source de ses pages).\n";
 		}
 	}
-	$langue = "";
 	if (isset($_POST["langue"]))
 	{
 		$langue = trim($_POST["langue"]);
@@ -48,7 +45,6 @@
 			$msgerreur .= "Veuillez indiquer la langue du site (fr, en, it, es, ...) du site.\n";
 		}
 	}
-	$url = "";
 	if (isset($_POST["url"]))
 	{
 		$url = trim($_POST["url"]);
@@ -62,7 +58,6 @@
 			$msgerreur .= "Veuillez renseigner l'adresse du site.\n";
 		}
 	}
-	$annee = "";
 	if (isset($_POST["annee"]))
 	{
 		$annee = trim($_POST["annee"]);
@@ -76,33 +71,64 @@
 			$msgerreur .= "Veuillez renseigner l'année de lancement du site.\n";
 		}
 	}
-	$stats = "";
+	if (isset($_POST["rooturl"]))
+	{
+		config_setvar("rooturl", trim(strip_tags($_POST["rooturl"])));
+		$msginfo .= "L'adresse de la page d'accueil du site a été mise à jour.\n";
+	}
+	if (isset($_POST["seoc"]))
+	{
+		config_setvar("seo_c", (isset($_POST["seoc"]) && ("O" == $_POST["seoc"])));
+		$msginfo .= "Le prérenseignement de l'indexation des catégories a été mise à jour.\n";
+	}
+	if (isset($_POST["seop"]))
+	{
+		config_setvar("seo_p", (isset($_POST["seop"]) && ("O" == $_POST["seop"])));
+		$msginfo .= "Le prérenseignement de l'indexation des pages a été mise à jour.\n";
+	}
+	if (isset($_POST["seopage"]))
+	{
+		config_setvar("seo_page", (isset($_POST["seopage"]) && ("O" == $_POST["seopage"])));
+		$msginfo .= "Le prérenseignement de l'indexation des pages a été mise à jour.\n";
+	}
 	if (isset($_POST["stats"]))
 	{
 		$stats = trim($_POST["stats"]);
 		config_setvar("stats", $stats);
 		$msginfo .= "Le code de statistiques du site a été mise à jour.\n";
 	}
-	$seoc = false;
-	if (isset($_POST["seoc"]))
+	if (isset($_POST["ckeditor_cdn"]))
 	{
-		$seoc = (isset($_POST["seoc"]) && ("O" == $_POST["seoc"]));
-		config_setvar("seo_c", $seoc);
-		$msginfo .= "Le prérenseignement de l'indexation des catégories a été mise à jour.\n";
+		switch ($_POST["ckeditor_cdn"])
+		{
+			case "basic":
+			case "standard":
+			case "full":
+				config_setvar("ckeditor_cdn", $_POST["ckeditor_cdn"]);
+				break;
+			default:
+				config_setvar("ckeditor_cdn", "");
+		}
+		$msginfo .= "La version utilisée de CK Editor a été mise à jour a été mise à jour.\n";
 	}
-	$seop = true;
-	if (isset($_POST["seop"]))
+	if (isset($_POST["jquery_cdn"]))
 	{
-		$seop = (isset($_POST["seop"]) && ("O" == $_POST["seop"]));
-		config_setvar("seo_p", $seop);
-		$msginfo .= "Le prérenseignement de l'indexation des pages a été mise à jour.\n";
+		switch ($_POST["jquery_cdn"])
+		{
+			case "jquery":
+			case "google":
+			case "microsoft":
+				config_setvar("jquery_cdn", $_POST["jquery_cdn"]);
+				break;
+			default:
+				config_setvar("jquery_cdn", "");
+		}
+		$msginfo .= "La version utilisée de jQuery a été mise à jour a été mise à jour.\n";
 	}
-	$seopage = true;
-	if (isset($_POST["seopage"]))
+	if (isset($_POST["1tpe_pseudo"]))
 	{
-		$seopage = (isset($_POST["seopage"]) && ("O" == $_POST["seopage"]));
-		config_setvar("seo_page", $seopage);
-		$msginfo .= "Le prérenseignement de l'indexation des pages a été mise à jour.\n";
+		config_setvar("1tpe_pseudo", trim(strip_tags($_POST["1tpe_pseudo"])));
+		$msginfo .= "Votre pseudo d'affilié chez 1TPE a été mis à jour.\n";
 	}
 
 ?><h2>Configuration du site</h2><?php
@@ -117,7 +143,7 @@
 	
 ?><form method="POST" action="<?php print(site_url()); ?>/admin/config/">
 	<fieldset>
-		<legend>Paramètres du site</legend>
+		<legend>Informations sur le site</legend>
 		<p><label for="frmtitre">Titre</label><br />
 		<input type="text" name="titre" id="frmtitre" value="<?php print(htmlentities(config_getvar("titre"),ENT_COMPAT,"UTF-8")); ?>"></p>
 		<p><label for="frmauteur">Auteur</label><br />
@@ -128,8 +154,11 @@
 		<input type="text" name="url" id="frmurl" value="<?php print(htmlentities(config_getvar("url","http://".$_SERVER["HTTP_HOST"].site_url()),ENT_COMPAT,"UTF-8")); ?>"></p>
 		<p><label for="frmannee">Année de lancement du site</label><br />
 		<input type="text" name="annee" id="frmannee" value="<?php print(htmlentities(config_getvar("annee",date("Y")),ENT_COMPAT,"UTF-8")); ?>"></p>
-		<p><label for="frmstats">Tag de statistiques</label><br />
-		<textarea name="stats" id="frmstats" cols="80" rows="10"><?php print(config_getvar("stats")); ?></textarea></p>
+		<p><label for="frmrooturl">Adresse de la page d'accueil (facultatif, par défaut ce sera la rubrique racine du blog)</label><br />
+		<input type="text" name="rooturl" id="frmrooturl" value="<?php print(htmlentities(config_getvar("rooturl",""),ENT_COMPAT,"UTF-8")); ?>"></p>
+	</fieldset>
+	<fieldset>
+		<legend>Statistiques et SEO</legend>
 		<p><label for="frmseoc">Par défaut, indexer les pages de catégories dans les moteurs de recherche ?</label><br />
 		<select name="seoc" id="frmseoc">
 			<option value="O"<?php print((config_getvar("seo_c",false))?" selected=\"selected\"":""); ?>>Oui</option>
@@ -145,8 +174,28 @@
 			<option value="O"<?php print((config_getvar("seo_page",true))?" selected=\"selected\"":""); ?>>Oui</option>
 			<option value="N"<?php print((config_getvar("seo_page",true))?"":" selected=\"selected\""); ?>>Non</option>
 		</select></p>
-		<p><input type="submit" value="Enregistrer"></p>
+		<p><label for="frmstats">Tag de statistiques</label><br />
+		<textarea name="stats" id="frmstats" cols="80" rows="10"><?php print(config_getvar("stats")); ?></textarea></p>
 	</fieldset>
+	<fieldset>
+		<legend>Paramètres de Bloginus</legend>
+		<p><label for="frmckeditor">Version de CK Editor à utiliser en administration du blog ?</label><br />
+		<select name="ckeditor_cdn" id="frmckeditor">
+			<option value=""<?php print(("" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.x.x full (CDN Olf Software)</option>
+			<option value="basic"<?php print(("basic" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.4.7 basic (CDN CK Editor)</option>
+			<option value="standard"<?php print(("standard" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.4.7 standard (CDN CK Editor)</option>
+			<option value="full"<?php print(("full" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.4.7 full (CDN CK Editor)</option>
+		</select></p>
+		<p><label for="frmjquery">Version de jQuery à utiliser en administration du blog ?</label><br />
+		<select name="jquery_cdn" id="frmjquery">
+			<option value=""<?php print(("" == config_getvar("jquery_cdn",""))?" selected=\"selected\"":""); ?>>1.x.x (CDN Olf Software)</option>
+			<option value="jquery"<?php print(("jquery" == config_getvar("jquery_cdn",""))?" selected=\"selected\"":""); ?>>1.11.3 (CDN jQuery)</option>
+			<option value="google"<?php print(("google" == config_getvar("jquery_cdn",""))?" selected=\"selected\"":""); ?>>1.11.3 (CDN Google)</option>
+			<option value="microsoft"<?php print(("microsoft" == config_getvar("jquery_cdn",""))?" selected=\"selected\"":""); ?>>1.11.3 (CDN Microsoft)</option>
+		</select></p>
+		<p><label for="frm1tpe">Pseudo d'affilié <a href="http://vasur.fr/1tpe" target="_blank">1TPE</a> (utilisé sur le "powered by" en pied de page des thèmes)</label><br />
+		<input type="text" name="1tpe_pseudo" id="frm1tpe" value="<?php print(htmlentities(config_getvar("1tpe_pseudo",""),ENT_COMPAT,"UTF-8")); ?>"></p>	</fieldset>
+	<p><input type="submit" value="Enregistrer"></p>
 </form><ul>
 	<li><a href="<?php print(site_url()); ?>/admin/">Retour au menu principal</a></li>
 </ul>

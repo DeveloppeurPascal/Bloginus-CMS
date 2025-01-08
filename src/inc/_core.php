@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06-09/2014
+	// (c) Patrick Prémartin / Olf Software 06-11/2014
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -314,11 +314,27 @@
 		{
 			return $email2." : n'est pas un email valide.";
 		}
-		list($compte,$domaine)=split("@",$email,2);
+		list($compte,$domaine)=explode("@",$email,2);
 		if ((function_exists (checkdnsrr)) && (!checkdnsrr($domaine,"MX")))
 		{
 			return $email2." : Ce domaine (".$domaine.") n'accepte pas les emails";
 		}
 		return $email2;
+	}
+	
+	function bloginus_powered_by()
+	{
+		$res = "Powered by <a href=\"";
+		$pseudo = trim(strip_tags(config_getvar("1tpe_pseudo","")));
+		if ($pseudo != "")
+		{
+			$res .= "http://go.".$pseudo.".olfsoft.2.1tpe.net";
+		}
+		else
+		{
+			$res .= "http://www.bloginus-lescript.fr/";
+		}
+		$res .= "\" target=\"_blank\">Bloginus</a>";
+		return $res;
 	}
 ?>

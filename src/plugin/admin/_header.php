@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06/2014
+	// (c) Patrick Prémartin / Olf Software 06/2014-06/2015
 	//
 	// http://www.bloginus-lescript.fr
 ?><!DOCTYPE html>
@@ -12,9 +12,36 @@
 <meta name="Robots" content="noindex,nofollow">
 <meta http-equiv="Content-Language" content="fr">
 <link rel="stylesheet" type="text/css" href="<?php print(site_url()); ?>/css/admin/styles.css">
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="//cdn.ckeditor.com/4.4.5.1/full/ckeditor.js"></script>
-<script type="text/javascript" src="//cdn.ckeditor.com/4.4.5.1/full/adapters/jquery.js"></script>
+<?php
+	switch (config_getvar("jquery_cdn",""))
+	{
+		case "jquery":
+			$jquery_url = "//code.jquery.com/jquery-1.11.3.min.js";
+			break;
+		case "google":
+			$jquery_url = "//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js";
+			break;
+		case "microsoft":
+			$jquery_url = "//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js";
+			break;
+		default :
+			$jquery_url = "//cdn.olfsoftware.fr/jquery/1/latest.php";
+	}
+?><script type="text/javascript" src="<?php print($jquery_url); ?>"></script>
+<?php
+	$ckeditor = config_getvar("ckeditor_cdn","");
+	switch ($ckeditor)
+	{
+		case "basic":
+		case "standard":
+		case "full":
+			$ckeditor_url = "//cdn.ckeditor.com/4.4.7/".$ckeditor."/";
+			break;
+		default :
+			$ckeditor_url = "//cdn.olfsoftware.fr/ckeditor/4/latest/";
+	}
+?><script type="text/javascript" src="<?php print($ckeditor_url); ?>ckeditor.js"></script>
+<script type="text/javascript" src="<?php print($ckeditor_url); ?>adapters/jquery.js"></script>
 </head>
 <body>
 <h1>Bloginus</h1>
