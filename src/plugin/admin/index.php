@@ -23,7 +23,7 @@
 		if (count($menu) > 0)
 		{
 			print("<div id=\"menu\">");
-			while(list($key,$option) = each($menu))
+			foreach ($menu as $key=>$option)
 			{
 				print("<a href=\"".site_url()."/admin/".$option."/admin.php\">".$option."</a>");
 			}

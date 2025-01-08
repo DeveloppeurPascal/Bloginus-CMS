@@ -35,7 +35,7 @@
 		case "basic":
 		case "standard":
 		case "full":
-			$ckeditor_url = "//cdn.ckeditor.com/4.5.6/".$ckeditor."/";
+			$ckeditor_url = "//cdn.ckeditor.com/4.7.0/".$ckeditor."/";
 			break;
 		default :
 			$ckeditor_url = "//cdn.olfsoftware.fr/ckeditor/4/latest/";

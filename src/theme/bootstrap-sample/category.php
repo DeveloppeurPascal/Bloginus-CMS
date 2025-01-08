@@ -4,8 +4,7 @@
 	if (isset($autresarticles) && is_array($autresarticles) && $categorie["published"] && (! (isset($article) && is_array($article))))
 	{
 		$liste = array();
-		reset($autresarticles);
-		while (list($key,$value)=each($autresarticles))
+		foreach ($autresarticles as $key=>$value)
 		{
 			if ($value["published"])
 				$liste[] = post_get_infos($value["id"]);

@@ -81,8 +81,7 @@
 			<input type="text" name="contact_sujet" id="frmcontact_sujet" value="<?php print(htmlentities(config_getvar("contact-sujet"),ENT_COMPAT,"UTF-8")); ?>"></p>
 <?php
 	$i = 0;
-	reset($destinataires);
-	while (list($key,$value) = each($destinataires))
+	foreach ($destinataires as $key=>$value)
 	{
 ?>
 			<fieldset>

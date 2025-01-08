@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 08-09/2014
+	// (c) Patrick Prémartin / Olf Software 08/2014 - 09/2017
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -17,7 +17,7 @@
 	{ // page inexistant
 		page404();
 	}
-	else if ((! $page["published"]) && (! (isset($_SESSION["user_connected"]) && ("1" == $_SESSION["user_connected"]))))
+	else if ((! $page["published"]) && (! (isset($_SESSION["user_connected"]) && ("1" == $_SESSION["user_connected"]))) && (! (isset($_GET["f"]) && ("1" == $_GET["f"]))))
 	{ // page non publiée (sauf pour les membres connectés qui peuvent voir toutes les pages)
 		unset($page);
 		page404();

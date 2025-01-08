@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 09/2014
+	// (c) Patrick Prémartin / Olf Software 09/2014 - 02/2016
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -49,10 +49,18 @@
 	// traitement des actions
 	if ("update" == $op)
 	{ // ajout ou mise à jour du contenu du lien
-		$lien = array();
+		$lien = link_get_infos($lien_id);
+		if (false == $lien)
+		{
+			$lien = array();
+		}
 		$lien["id"] = $lien_id;
 		$lien["label"] = (isset($_POST["label"]))?trim($_POST["label"]):"";
 		$lien["text"] = (isset($_POST["text"]))?trim($_POST["text"]):"";
+		if (config_getvar("saisieabstract",true))
+		{
+			$lien["abstract"] = (isset($_POST["abstract"]))?trim($_POST["abstract"]):"";
+		}
 		$lien["url"] = (isset($_POST["url"]))?trim($_POST["url"]):"";
 		$lien["published"] = (isset($_POST["published"]) && ("O" == $_POST["published"]));
 		$lien["timestamp"] = time();
@@ -62,14 +70,14 @@
 			if (false !== ($liste = link_get_liste($categorie_id)))
 			{
 				$ok = false;
-				reset($liste);
-				while ((list($key,$value) = each($liste)) && (! $ok))
+				foreach ($liste as $key=>$value)
 				{
 					if ($value["id"] == $lien_id)
 					{
 						$liste[$key]["published"]=$lien["published"];
 						$liste[$key]["timestamp"]=$lien["timestamp"];
 						$ok = true;
+						break;
 					}
 				}
 				if (! $ok)
@@ -107,10 +115,10 @@
 				while ((! $ok) && (3 <= strlen($id = link_id_create($i++,$categorie_id))-strlen($categorie_id)))
 				{
 					$trouve = false;
-					reset($liste);
-					while ((! $trouve) && (list($key,$value) = each($liste)))
+					foreach ($liste as $key=>$value)
 					{
 						$trouve = ($id == $value["id"]);
+						if ($trouve) break;
 					}
 					$ok = (! $trouve);
 				}
@@ -165,9 +173,14 @@
 		$lien["id"] = $lien_id;
 		$lien["label"] = "";
 		$lien["text"] = "";
+		$lien["abstract"] = "";
 		$lien["url"] = "";
 		$lien["published"] = false;
 		$lien["timestamp"] = 0;
+	}
+	if (! isset($lien["abstract"]))
+	{
+		$lien["abstract"] = "";
 	}
 ?><form id="frm" method="POST" action="<?php print(site_url()); ?>/admin/lien/">
 	<input type="hidden" name="op" id="frmop" value="update">
@@ -178,8 +191,13 @@
 		<p><label for="frmlabel">Titre</label><br />
 		<input type="text" name="label" id="frmlabel" value="<?php print(htmlentities($lien["label"],ENT_COMPAT,"UTF-8")); ?>"></p>
 		<p><label for="frmtext">Texte</label><br />
-		<textarea name="text" id="frmtext"><?php print(htmlentities($lien["text"],ENT_COMPAT,"UTF-8")); ?></textarea></p>
-		<p><label for="frmurl">URL</label><br />
+		<textarea name="text" id="frmtext"><?php print(htmlentities($lien["text"],ENT_COMPAT,"UTF-8")); ?></textarea></p><?php
+	if (config_getvar("saisieabstract",true))
+	{
+?><p><label for="frmabstract">Extrait / chapeau</label><br />
+<textarea name="abstract" id="frmabstract"><?php print(htmlentities($lien["abstract"],ENT_COMPAT,"UTF-8")); ?></textarea></p><?php
+	}
+?><p><label for="frmurl">URL</label><br />
 		<input type="text" name="url" id="frmurl" value="<?php print(htmlentities($lien["url"],ENT_COMPAT,"UTF-8")); ?>"></p>
 		<p><label for="frmpublished">Publié ?</label><br />
 		<select name="published" id="frmpublished">
@@ -201,8 +219,7 @@
 	$categorie_liste = category_get_liste($categorie_id);
 	if (is_array($categorie_liste))
 	{
-		reset($categorie_liste);
-		while (list($key,$value)=each($categorie_liste))
+		foreach ($categorie_liste as $key=>$value)
 		{
 			$cat = category_get_infos($value["id"]);
 			$sousrubriques .= "<a href=\"".site_url()."/admin/lien/?categorie_id=".$value["id"]."\"><!-- ".$cat["id"]." -->".$cat["label"]."</a><br />";
@@ -215,8 +232,7 @@
 	$lien_liste = link_get_liste($categorie_id);
 	if (is_array($lien_liste))
 	{
-		reset($lien_liste);
-		while (list($key,$value)=each($lien_liste))
+		foreach ($lien_liste as $key=>$value)
 		{
 			$art = link_get_infos($value["id"]);
 			$autresliens .= "<a href=\"".site_url()."/admin/lien/?categorie_id=".$categorie_id."&id=".$value["id"]."\"><!-- ".$art["id"]." -->".aaaammjjhhmmss_to_string(date("YmdHis",intval($art["timestamp"])))." - ".$art["label"]."</a><br />";

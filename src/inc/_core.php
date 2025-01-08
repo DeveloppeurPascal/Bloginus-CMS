@@ -303,10 +303,10 @@
 		{
 			return $email2." : Email trop long";
 		}
-		if (!@ereg("@",$email))
-		{
-			return $email2." : Le email n'a pas d'arobase (@)";
-		}
+		// if (!@ereg("@",$email))
+		// {
+			// return $email2." : Le email n'a pas d'arobase (@)";
+		// }
 		if (preg_match_all("/([^a-zA-Z0-9_\@\.\-])/i", $email, $trouve))
 		{
 			return $email2." :  caractère(s) interdit dans un email (".implode(", ",$trouve[0]).").";
@@ -315,11 +315,11 @@
 		{
 			return $email2." : n'est pas un email valide.";
 		}
-		list($compte,$domaine)=explode("@",$email,2);
-		if ((function_exists (checkdnsrr)) && (!checkdnsrr($domaine,"MX")))
-		{
-			return $email2." : Ce domaine (".$domaine.") n'accepte pas les emails";
-		}
+		// list($compte,$domaine)=explode("@",$email,2);
+		// if ((function_exists (checkdnsrr)) && (!checkdnsrr($domaine,"MX")))
+		// {
+			// return $email2." : Ce domaine (".$domaine.") n'accepte pas les emails";
+		// }
 		return $email2;
 	}
 	

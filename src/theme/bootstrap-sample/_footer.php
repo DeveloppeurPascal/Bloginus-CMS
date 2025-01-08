@@ -21,8 +21,7 @@
 	{
 		$visible = false;
 		$liste = array();
-		reset($souscategories);
-		while (list($key,$value)=each($souscategories))
+		foreach ($souscategories as $key=>$value)
 		{
 			if ($value["published"])
 				$liste[] = category_get_infos($value["id"]);
@@ -46,8 +45,7 @@
 	{
 		$visible = false;
 		$liste = array();
-		reset($autresarticles);
-		while (list($key,$value)=each($autresarticles))
+		foreach ($autresarticles as $key=>$value)
 		{
 			if ($value["published"])
 				$liste[] = post_get_infos($value["id"]);
@@ -72,8 +70,7 @@
 	{
 		$visible = false;
 		$liste = array();
-		reset($liens);
-		while (list($key,$value)=each($liens))
+		foreach ($liens as $key=>$value)
 		{
 			if ($value["published"])
 				$liste[] = link_get_infos($value["id"]);

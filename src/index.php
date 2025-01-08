@@ -5,28 +5,7 @@
 	// http://www.bloginus-lescript.fr
 	session_start();
 	
-	define('_BloginusVersion_','5');
-
-	// nettoyage des paramètres passés au programme
-	if (get_magic_quotes_gpc())
-	{
-		// print("<br>nettoyage de \$_GET");
-		reset($_GET);
-		while (list($key,$value)=each($_GET))
-		{
-			$_GET[$key] = stripslashes($value);
-		}
-		// print("<br>nettoyage de \$_POST");
-		reset($_POST);
-		while (list($key,$value)=each($_POST))
-		{
-			$_POST[$key] = stripslashes($value);
-		}
-	}
-	else
-	{
-		// print("<br>pas de nettoyage des paramètres");
-	}
+	define('_BloginusVersion_','6'); // 20220502 - mise à niveau vers PHP 7.x
 
 	// chargement des fichiers de /inc
 	if ($dossier = opendir(dirname(__FILE__)."/inc"))
@@ -59,8 +38,7 @@
 	$url = substr($_SERVER["REQUEST_URI"],strlen(site_url())+1); // "/" final à prendre en compte
 	// print("<br>adresse appelée : ".$url);
 	$elem = explode("/",$url);
-	reset($elem);
-	while (list($key,$value) = each($elem))
+	foreach ($elem as $key=>$value)
 	{
 		$elem[$key] = trim($value);
 	}

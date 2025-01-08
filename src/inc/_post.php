@@ -136,8 +136,7 @@
 		$souscategories = category_get_liste($categorie_id);
 		if (is_array($souscategories))
 		{
-			reset($souscategories);
-			while(list($key,$subcat)=each($souscategories))
+			foreach ($souscategories as $key=>$subcat)
 			{
 				feed_regenerer_liste($subcat["id"]);
 			}
@@ -146,8 +145,7 @@
 		if (is_array($articles))
 		{
 			$feed = post_get_liste_feed();
-			reset($articles);
-			while(list($key,$article)=each($articles))
+			foreach ($articles as $key=>$article)
 			{
 				$feed[] = $article;
 			}

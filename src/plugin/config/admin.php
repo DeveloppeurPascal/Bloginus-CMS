@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 07/2014-01/2016
+	// (c) Patrick Prémartin / Olf Software 07/2014 - 02/2016
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -130,6 +130,11 @@
 		config_setvar("1tpe_pseudo", trim(strip_tags($_POST["1tpe_pseudo"])));
 		$msginfo .= "Votre pseudo d'affilié chez 1TPE a été mis à jour.\n";
 	}
+	if (isset($_POST["saisieabstract"]))
+	{
+		config_setvar("saisieabstract", (isset($_POST["saisieabstract"]) && ("O" == $_POST["saisieabstract"])));
+		$msginfo .= "Le conditionnement du champ de saisie des chapeaux a été mise à jour.\n";
+	}
 
 ?><h2>Configuration du site</h2><?php
 	if ("" != $msgerreur)
@@ -182,9 +187,9 @@
 		<p><label for="frmckeditor">Version de CK Editor à utiliser en administration du blog ?</label><br />
 		<select name="ckeditor_cdn" id="frmckeditor">
 			<option value=""<?php print(("" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.x.x full (CDN Olf Software)</option>
-			<option value="basic"<?php print(("basic" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.5.6 basic (CDN CK Editor)</option>
-			<option value="standard"<?php print(("standard" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.5.6 standard (CDN CK Editor)</option>
-			<option value="full"<?php print(("full" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.5.6 full (CDN CK Editor)</option>
+			<option value="basic"<?php print(("basic" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.7.0 basic (CDN CK Editor)</option>
+			<option value="standard"<?php print(("standard" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.7.0 standard (CDN CK Editor)</option>
+			<option value="full"<?php print(("full" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.7.0 full (CDN CK Editor)</option>
 		</select></p>
 		<p><label for="frmjquery">Version de jQuery à utiliser en administration du blog ?</label><br />
 		<select name="jquery_cdn" id="frmjquery">
@@ -194,7 +199,13 @@
 			<option value="microsoft"<?php print(("microsoft" == config_getvar("jquery_cdn",""))?" selected=\"selected\"":""); ?>>1.12.0 (CDN Microsoft)</option>
 		</select></p>
 		<p><label for="frm1tpe">Pseudo d'affilié <a href="http://vasur.fr/1tpe" target="_blank">1TPE</a> (utilisé sur le "powered by" en pied de page des thèmes)</label><br />
-		<input type="text" name="1tpe_pseudo" id="frm1tpe" value="<?php print(htmlentities(config_getvar("1tpe_pseudo",""),ENT_COMPAT,"UTF-8")); ?>"></p>	</fieldset>
+		<input type="text" name="1tpe_pseudo" id="frm1tpe" value="<?php print(htmlentities(config_getvar("1tpe_pseudo",""),ENT_COMPAT,"UTF-8")); ?>"></p>
+		<p><label for="frmabstractonoff">Permettre la saisie d'un chapeau/extrait/abstract au niveau des rubriques, pages, articles et liens ?</label><br />
+		<select name="saisieabstract" id="frmabstractonoff">
+			<option value="O"<?php print((config_getvar("saisieabstract",true))?" selected=\"selected\"":""); ?>>Oui</option>
+			<option value="N"<?php print((config_getvar("saisieabstract",true))?"":" selected=\"selected\""); ?>>Non</option>
+		</select></p>
+	</fieldset>
 	<p><input type="submit" value="Enregistrer"></p>
 </form><ul>
 	<li><a href="<?php print(site_url()); ?>/admin/">Retour au menu principal</a></li>

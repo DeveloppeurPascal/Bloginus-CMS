@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 08/2014-01/2016
+	// (c) Patrick Prémartin / Olf Software 08/2014 - 09/2017
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -32,10 +32,18 @@
 	// traitement des actions
 	if ("update" == $op)
 	{ // ajout ou mise à jour du contenu de la page
-		$page = array();
+		$page = page_get_infos($page_id);
+		if (false == $page)
+		{
+			$page = array();
+		}
 		$page["id"] = $page_id;
 		$page["label"] = (isset($_POST["label"]))?trim($_POST["label"]):"";
 		$page["text"] = (isset($_POST["text"]))?trim($_POST["text"]):"";
+		if (config_getvar("saisieabstract",true))
+		{
+			$page["abstract"] = (isset($_POST["abstract"]))?trim($_POST["abstract"]):"";
+		}
 		$page["url"] = (isset($_POST["url"]))?trim($_POST["url"]):"";
 		$page["published"] = (isset($_POST["published"]) && ("O" == $_POST["published"]));
 		$page["seo"] = (isset($_POST["seo"]))?(("O" == $_POST["seo"])?true:(("N" == $_POST["seo"])?false:"")):"";
@@ -46,14 +54,14 @@
 			if (false !== ($liste = page_get_liste()))
 			{
 				$ok = false;
-				reset($liste);
-				while ((list($key,$value) = each($liste)) && (! $ok))
+				foreach ($liste as $key=>$value)
 				{
 					if ($value["id"] == $page_id)
 					{
 						$liste[$key]["published"]=$page["published"];
 						$liste[$key]["timestamp"]=$page["timestamp"];
 						$ok = true;
+						break;
 					}
 				}
 				if (! $ok)
@@ -93,9 +101,7 @@
 		if (false !== ($liste = page_get_liste()))
 		{
 			$id_max = 0;
-			reset($liste);
-			// var_dump($liste);
-			while (list($key,$value) = each($liste))
+			foreach ($liste as $key=>$value)
 			{
 				$id = base36_vers_entier($value["id"]);
 				// print("<p>id=".$id."</p>");
@@ -132,10 +138,15 @@
 		$page["id"] = $page_id;
 		$page["label"] = "";
 		$page["text"] = "";
+		$page["abstract"] = "";
 		$page["url"] = "";
 		$page["published"] = false;
 		$page["seo"] = "";
 		$page["timestamp"] = 0;
+	}
+	if (! isset($page["abstract"]))
+	{
+		$page["abstract"] = "";
 	}
 ?><form id="frm" method="POST" action="<?php print(site_url()); ?>/admin/page/">
 	<input type="hidden" name="op" id="frmop" value="update">
@@ -145,8 +156,13 @@
 		<p><label for="frmlabel">Titre</label><br />
 		<input type="text" name="label" id="frmlabel" value="<?php print(htmlentities($page["label"],ENT_COMPAT,"UTF-8")); ?>"></p>
 		<p><label for="frmtext">Texte</label><br />
-		<textarea name="text" id="frmtext"><?php print(htmlentities($page["text"],ENT_COMPAT,"UTF-8")); ?></textarea></p>
-		<p><label for="frmurl">Nom de la page web</label><br />
+		<textarea name="text" id="frmtext"><?php print(htmlentities($page["text"],ENT_COMPAT,"UTF-8")); ?></textarea></p><?php
+	if (config_getvar("saisieabstract",true))
+	{
+?><p><label for="frmabstract">Extrait / chapeau</label><br />
+<textarea name="abstract" id="frmabstract"><?php print(htmlentities($page["abstract"],ENT_COMPAT,"UTF-8")); ?></textarea></p><?php
+	}
+?><p><label for="frmurl">Nom de la page web</label><br />
 		<input type="text" name="url" id="frmurl" value="<?php print(htmlentities($page["url"],ENT_COMPAT,"UTF-8")); ?>"></p>
 		<p><label for="frmpublished">Publiée ?</label><br />
 		<select name="published" id="frmpublished">
@@ -161,6 +177,9 @@
 		</select></p>
 		<p>Date de dernière modification : <?php print(aaaammjjhhmmss_to_string(date("YmdHis",intval($page["timestamp"])))); ?></p>
 		<p>URL de cette page : <a href="<?php print(page_url($page_id)); ?>" target="_blank"><?php print(page_url($page_id)); ?></a></p>
+<?php if (! $page["published"]) { ?>
+		<p>URL de sa page (même privée) : <a href="<?php print(page_url($page_id)); ?>?f=1" target="_blank"><?php print(page_url($page_id)); ?>?f=1</a></p>
+<?php } ?>
 		<p><input type="checkbox" value="X" name="rootpage" id="frmrootpage" <?php print((("" != config_getvar("rooturl")) && (config_getvar("rooturl")==page_url($page_id)))?"checked=\"checked\" ":""); ?>/><input type="hidden" name="rootpageprevious" value="<?php print((config_getvar("rooturl")==page_url($page_id))?"X":""); ?>" /> <label for="frmrootpage">utiliser en page d'accueil du site</label></p>
 		<p><input type="submit" value="Enregistrer"></p>
 	</fieldset>
@@ -175,8 +194,7 @@
 	$page_liste = page_get_liste();
 	if (is_array($page_liste))
 	{
-		reset($page_liste);
-		while (list($key,$value)=each($page_liste))
+		foreach ($page_liste as $key=>$value)
 		{
 			$pag = page_get_infos($value["id"]);
 			$autrespages .= "<a href=\"".site_url()."/admin/page/?id=".$pag["id"]."\"><!-- ".$pag["id"]." -->".aaaammjjhhmmss_to_string(date("YmdHis",intval($pag["timestamp"])))." - ".$pag["label"]."</a><br />";

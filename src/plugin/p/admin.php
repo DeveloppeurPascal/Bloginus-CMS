@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06/2014-06/2015
+	// (c) Patrick Prémartin / Olf Software 06/2014 - 09/2017
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -49,10 +49,18 @@
 	// traitement des actions
 	if ("update" == $op)
 	{ // ajout ou mise à jour du contenu de l'article
-		$article = array();
+		$article = post_get_infos($article_id);
+		if (false == $article)
+		{
+			$article = array();
+		}
 		$article["id"] = $article_id;
 		$article["label"] = (isset($_POST["label"]))?trim($_POST["label"]):"";
 		$article["text"] = (isset($_POST["text"]))?trim($_POST["text"]):"";
+		if (config_getvar("saisieabstract",true))
+		{
+			$article["abstract"] = (isset($_POST["abstract"]))?trim($_POST["abstract"]):"";
+		}
 		$article["url"] = (isset($_POST["url"]))?trim($_POST["url"]):"";
 		$article["published"] = (isset($_POST["published"]) && ("O" == $_POST["published"]));
 		$article["seo"] = (isset($_POST["seo"]))?(("O" == $_POST["seo"])?true:(("N" == $_POST["seo"])?false:"")):"";
@@ -63,14 +71,14 @@
 			if (false !== ($liste = post_get_liste($categorie_id)))
 			{
 				$ok = false;
-				reset($liste);
-				while ((list($key,$value) = each($liste)) && (! $ok))
+				foreach ($liste as $key=>$value)
 				{
 					if ($value["id"] == $article_id)
 					{
 						$liste[$key]["published"]=$article["published"];
 						$liste[$key]["timestamp"]=$article["timestamp"];
 						$ok = true;
+						break;
 					}
 				}
 				if (! $ok)
@@ -94,14 +102,14 @@
 			if (false !== ($liste = post_get_liste_feed()))
 			{
 				$ok = false;
-				reset($liste);
-				while ((list($key,$value) = each($liste)) && (! $ok))
+				foreach ($liste as $key=>$value)
 				{
 					if ($value["id"] == $article_id)
 					{
 						$liste[$key]["published"]=$article["published"];
 						$liste[$key]["timestamp"]=$article["timestamp"];
 						$ok = true;
+						break;
 					}
 				}
 				if (! $ok)
@@ -147,10 +155,10 @@
 				while ((! $ok) && (3 <= strlen($id = post_id_create($i++,$categorie_id))-strlen($categorie_id)))
 				{
 					$trouve = false;
-					reset($liste);
-					while ((! $trouve) && (list($key,$value) = each($liste)))
+					foreach ($liste as $key=>$value)
 					{
 						$trouve = ($id == $value["id"]);
+						if ($trouve) break;
 					}
 					$ok = (! $trouve);
 				}
@@ -205,6 +213,7 @@
 		$article["id"] = $article_id;
 		$article["label"] = "";
 		$article["text"] = "";
+		$article["abstract"] = "";
 		$article["url"] = "";
 		$article["published"] = false;
 		$article["seo"] = "";
@@ -213,6 +222,10 @@
 	if (! isset($article["seo"]))
 	{
 		$article["seo"] = "";
+	}
+	if (! isset($article["abstract"]))
+	{
+		$article["abstract"] = "";
 	}
 ?><form id="frm" method="POST" action="<?php print(site_url()); ?>/admin/p/">
 	<input type="hidden" name="op" id="frmop" value="update">
@@ -223,8 +236,13 @@
 		<p><label for="frmlabel">Titre</label><br />
 		<input type="text" name="label" id="frmlabel" value="<?php print(htmlentities($article["label"],ENT_COMPAT,"UTF-8")); ?>"></p>
 		<p><label for="frmtext">Texte</label><br />
-		<textarea name="text" id="frmtext"><?php print(htmlentities($article["text"],ENT_COMPAT,"UTF-8")); ?></textarea></p>
-		<p><label for="frmurl">Nom de la page web</label><br />
+		<textarea name="text" id="frmtext"><?php print(htmlentities($article["text"],ENT_COMPAT,"UTF-8")); ?></textarea></p><?php
+	if (config_getvar("saisieabstract",true))
+	{
+?><p><label for="frmabstract">Extrait / chapeau</label><br />
+<textarea name="abstract" id="frmabstract"><?php print(htmlentities($article["abstract"],ENT_COMPAT,"UTF-8")); ?></textarea></p><?php
+	}
+?><p><label for="frmurl">Nom de la page web</label><br />
 		<input type="text" name="url" id="frmurl" value="<?php print(htmlentities($article["url"],ENT_COMPAT,"UTF-8")); ?>"></p>
 		<p><label for="frmpublished">Publiée ?</label><br />
 		<select name="published" id="frmpublished">
@@ -239,6 +257,9 @@
 		</select></p>
 		<p>Date de dernière modification : <?php print(aaaammjjhhmmss_to_string(date("YmdHis",intval($article["timestamp"])))); ?></p>
 		<p>URL de sa page : <a href="<?php print(post_url($article_id)); ?>" target="_blank"><?php print(post_url($article_id)); ?></a></p>
+<?php if (! $article["published"]) { ?>
+		<p>URL de sa page (même privée) : <a href="<?php print(post_url($article_id)); ?>?f=1" target="_blank"><?php print(post_url($article_id)); ?>?f=1</a></p>
+<?php } ?>
 		<p><input type="checkbox" value="X" name="rootpage" id="frmrootpage" <?php print((("" != config_getvar("rooturl")) && (config_getvar("rooturl")==post_url($article_id)))?"checked=\"checked\" ":""); ?>/><input type="hidden" name="rootpageprevious" value="<?php print((config_getvar("rooturl")==post_url($article_id))?"X":""); ?>" /> <label for="frmrootpage">utiliser en page d'accueil du site</label></p>
 		<p><input type="submit" value="Enregistrer"></p>
 	</fieldset>
@@ -254,8 +275,7 @@
 	$categorie_liste = category_get_liste($categorie_id);
 	if (is_array($categorie_liste))
 	{
-		reset($categorie_liste);
-		while (list($key,$value)=each($categorie_liste))
+		foreach ($categorie_liste as $key=>$value)
 		{
 			$cat = category_get_infos($value["id"]);
 			$souscategories .= "<a href=\"".site_url()."/admin/p/?categorie_id=".$value["id"]."\"><!-- ".$cat["id"]." -->".$cat["label"]."</a><br />";
@@ -268,8 +288,7 @@
 	$article_liste = post_get_liste($categorie_id);
 	if (is_array($article_liste))
 	{
-		reset($article_liste);
-		while (list($key,$value)=each($article_liste))
+		foreach ($article_liste as $key=>$value)
 		{
 			$art = post_get_infos($value["id"]);
 			$autresarticles .= "<a href=\"".site_url()."/admin/p/?categorie_id=".$categorie_id."&id=".$value["id"]."\"><!-- ".$art["id"]." -->".aaaammjjhhmmss_to_string(date("YmdHis",intval($art["timestamp"])))." - ".$art["label"]."</a><br />";
