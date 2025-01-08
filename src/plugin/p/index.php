@@ -17,8 +17,8 @@
 	{ // article inexistant
 		page404();
 	}
-	else if (! $article["published"])
-	{ // article non publié
+	else if ((! $article["published"]) && (! (isset($_SESSION["user_connected"]) && ("1" == $_SESSION["user_connected"]))))
+	{ // article non publié (sauf pour les membres connectés qui peuvent voir toutes les pages)
 		page404();
 	}
 	else if (false === ($article_url = post_url($article_id)))

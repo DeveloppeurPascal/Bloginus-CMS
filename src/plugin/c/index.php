@@ -17,8 +17,8 @@
 	{ // catégorie inexistante
 		page404();
 	}
-	else if (! $categorie["published"])
-	{ // catégorie non publiée
+	else if ((! $categorie["published"]) && (! (isset($_SESSION["user_connected"]) && ("1" == $_SESSION["user_connected"]))))
+	{ // catégorie non publiée (sauf pour les membres connectés qui peuvent voir toutes les pages)
 		page404();
 	}
 	else if (false === ($categorie_url = category_url($categorie_id)))

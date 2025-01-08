@@ -83,6 +83,20 @@
 		config_setvar("stats", $stats);
 		$msginfo .= "Le code de statistiques du site a été mise à jour.\n";
 	}
+	$seoc = false;
+	if (isset($_POST["seoc"]))
+	{
+		$seoc = (isset($_POST["seoc"]) && ("O" == $_POST["seoc"]));
+		config_setvar("seo_c", $seoc);
+		$msginfo .= "Le prérenseignement de l'indexation des catégories a été mise à jour.\n";
+	}
+	$seop = true;
+	if (isset($_POST["seop"]))
+	{
+		$seop = (isset($_POST["seop"]) && ("O" == $_POST["seop"]));
+		config_setvar("seo_p", $seop);
+		$msginfo .= "Le prérenseignement de l'indexation des pages a été mise à jour.\n";
+	}
 
 ?><h2>Configuration du site</h2><?php
 	if ("" != $msgerreur)
@@ -108,7 +122,17 @@
 		<p><label for="frmannee">Année de lancement du site</label><br />
 		<input type="text" name="annee" id="frmannee" value="<?php print(htmlentities(config_getvar("annee",date("Y")),ENT_COMPAT,"UTF-8")); ?>"></p>
 		<p><label for="frmstats">Tag de statistiques</label><br />
-		<textarea name="stats" id="frmstats"><?php print(config_getvar("stats")); ?></textarea></p>
+		<textarea name="stats" id="frmstats" cols="80" rows="10"><?php print(config_getvar("stats")); ?></textarea></p>
+		<p><label for="frmseoc">Par défaut, indexer les pages de catégories dans les moteurs de recherche ?</label><br />
+		<select name="seoc" id="frmseoc">
+			<option value="O"<?php print((config_getvar("seo_c",false))?" selected=\"selected\"":""); ?>>Oui</option>
+			<option value="N"<?php print((config_getvar("seo_c",false))?"":" selected=\"selected\""); ?>>Non</option>
+		</select></p>
+		<p><label for="frmseop">Par défaut, indexer les pages dans les moteurs de recherche ?</label><br />
+		<select name="seop" id="frmseop">
+			<option value="O"<?php print((config_getvar("seo_p",true))?" selected=\"selected\"":""); ?>>Oui</option>
+			<option value="N"<?php print((config_getvar("seo_p",true))?"":" selected=\"selected\""); ?>>Non</option>
+		</select></p>
 		<p><input type="submit" value="Enregistrer"></p>
 	</fieldset>
 </form><ul>

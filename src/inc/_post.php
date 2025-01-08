@@ -95,6 +95,30 @@
 		$POST_LISTE[$category_id] = $liste;
 		return file_put_contents(creer_dossier(category_path($category_id))."/posts.dta",serialize($POST_LISTE[$category_id]));
 	}
+	$POST_LISTE_FEED = array();
+	function post_get_liste_feed()
+	{
+		global $POST_LISTE_FEED;
+		if (isset($POST_LISTE_FEED) && (count($POST_LISTE_FEED)>0))
+		{
+			return $POST_LISTE_FEED;
+		}
+		else if (false !== ($res = @file_get_contents(get_data_path()."/posts-all.dta")))
+		{
+			$POST_LISTE_FEED = unserialize($res);
+			return $POST_LISTE_FEED;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	function post_set_liste_feed($liste)
+	{
+		global $POST_LISTE_FEED;
+		$POST_LISTE_FEED = $liste;
+		return file_put_contents(creer_dossier(get_data_path())."/posts-all.dta",serialize($POST_LISTE_FEED));
+	}
 	function post_get_category_id($id)
 	{
 		return substr($id,0,strlen($id)-3);
@@ -106,5 +130,28 @@
 	function post_id_create($num,$categorie_id)
 	{
 		return $categorie_id.entier_vers_base36($num,3);
+	}
+	function feed_regenerer_liste($categorie_id="_")
+	{
+		$souscategories = category_get_liste($categorie_id);
+		if (is_array($souscategories))
+		{
+			reset($souscategories);
+			while(list($key,$subcat)=each($souscategories))
+			{
+				feed_regenerer_liste($subcat["id"]);
+			}
+		}
+		$articles = post_get_liste($categorie_id);
+		if (is_array($articles))
+		{
+			$feed = post_get_liste_feed();
+			reset($articles);
+			while(list($key,$article)=each($articles))
+			{
+				$feed[] = $article;
+			}
+			post_set_liste_feed($feed);
+		}
 	}
 ?>

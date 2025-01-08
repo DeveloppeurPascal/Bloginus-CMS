@@ -19,26 +19,39 @@
 			$extension = "png";
 		if ("" != $extension)
 		{
-			header("content-type: image/".$extension);
 			if ("admin" == $elem[1])
 			{
 				$elem[1] = $elem[2];
 				if (file_exists(dirname(__FILE__)."/../admin/".$elem[0]."/".$elem[1]))
 				{
+					header("content-type: image/".$extension);
 					readfile(dirname(__FILE__)."/../admin/".$elem[0]."/".$elem[1]);
+					exit;
 				}
-				exit;
 			}
-			$theme = config_getvar("theme","_default");
-			if (file_exists(dirname(__FILE__)."/../../theme/".$theme."/".$elem[0]."/".$elem[1]))
+			else
 			{
-				readfile(dirname(__FILE__)."/../../theme/".$theme."/".$elem[0]."/".$elem[1]);
+				$theme = config_getvar("theme","_default");
+				if (file_exists(dirname(__FILE__)."/../../theme/".$theme."/".$elem[0]."/".$elem[1]))
+				{
+					header("content-type: image/".$extension);
+					readfile(dirname(__FILE__)."/../../theme/".$theme."/".$elem[0]."/".$elem[1]);
+					exit;
+				}
+				else if (file_exists(dirname(__FILE__)."/../../theme/_default/".$elem[0]."/".$elem[1]))
+				{
+					header("content-type: image/".$extension);
+					readfile(dirname(__FILE__)."/../../theme/_default/".$elem[0]."/".$elem[1]);
+					exit;
+				}
+				else if (file_exists(dirname(__FILE__)."/../../".$elem[0]."/".$elem[1]))
+				{
+					header("content-type: image/".$extension);
+					readfile(dirname(__FILE__)."/../../".$elem[0]."/".$elem[1]);
+					exit;
+				}
 			}
-			else if (file_exists(dirname(__FILE__)."/../../theme/_default/".$elem[0]."/".$elem[1]))
-			{
-				readfile(dirname(__FILE__)."/../../theme/_default/".$elem[0]."/".$elem[1]);
-			}
-			exit;
 		}
 	}
+	page404();
 ?>

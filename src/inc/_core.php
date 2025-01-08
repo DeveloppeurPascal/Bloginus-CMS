@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06/2014
+	// (c) Patrick Prémartin / Olf Software 06-08/2014
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -158,13 +158,14 @@
 			if ($n = strrpos($nom_dossier, "/")) {
 				creer_dossier(substr($nom_dossier, 0, $n));
 				mkdir ($nom_dossier, 0777);
+				chmod($nom_dossier, 0775);
 			}
 		}
 		return $nom_dossier;
 	}
 	function en_url($ch) {
-		$let1 = array("à","â","é","è","ù","ê","î","ô","ö","ü","ï","%","'",",","ç","&","/","\\");
-		$let2 = array("a","a","e","e","u","e","i","o","o","u","i","pourcent"," "," ","c","-","-","-");
+		$let1 = array("à","â","ä","é","è","ë","ê","î","ï","ô","ö","ù","ü","û","%","'",",","ç","&","/","\\");
+		$let2 = array("a","a","a","e","e","e","e","i","i","o","o","u","u","u","pourcent"," "," ","c","-","-","-");
 		$ch = str_replace($let1,$let2,trim(strtolower(stripslashes($ch))));
 		$res = "";
 		for ($i = 0; $i < strlen ($ch); $i++) {
@@ -177,7 +178,7 @@
 	}
 	function fichier_inclure($nom_fichier)
 	{
-		global $categorie_id, $categorie, $souscategories, $autresarticles, $article_id, $article;
+		global $categorie_id, $categorie, $souscategories, $autresarticles, $article_id, $article, $plandusite, $titre_page;
 
 		$theme = config_getvar("theme","_default");
 		if (file_exists(dirname(__FILE__)."/../theme/".$theme."/".$nom_fichier))

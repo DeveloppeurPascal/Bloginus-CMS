@@ -38,6 +38,8 @@
 		$categorie["text"] = (isset($_POST["text"]))?trim($_POST["text"]):"";
 		$categorie["url"] = (isset($_POST["url"]))?trim($_POST["url"]):"";
 		$categorie["published"] = (isset($_POST["published"]) && ("O" == $_POST["published"]));
+		$categorie["seo"] = (isset($_POST["seo"]))?(("O" == $_POST["seo"])?true:(("N" == $_POST["seo"])?false:"")):"";
+		$categorie["timestamp"] = time();
 		if (false !== category_set_infos($categorie_id,$categorie))
 		{
 			$msginfo .= "Votre modification a bien été enregistrée au niveau de la page.\n";
@@ -53,18 +55,19 @@
 						if ($value["id"] == $categorie_id)
 						{
 							$liste[$key]["published"]=$categorie["published"];
+							$liste[$key]["timestamp"]=$categorie["timestamp"];
 							$ok = true;
 						}
 					}
 					if (! $ok)
 					{
-						$liste[] = array("id"=>$categorie_id, "published"=>$categorie["published"]);
+						$liste[] = array("id"=>$categorie_id, "published"=>$categorie["published"], "timestamp"=>$categorie["timestamp"]);
 					}
 				}
 				else
 				{
 					$liste = array();
-					$liste[] = array("id"=>$categorie_id, "published"=>$categorie["published"]);
+					$liste[] = array("id"=>$categorie_id, "published"=>$categorie["published"], "timestamp"=>$categorie["timestamp"]);
 				}
 				if (false !== category_set_liste($mere_id,$liste))
 				{
@@ -154,6 +157,16 @@
 		$categorie["text"] = "";
 		$categorie["url"] = "";
 		$categorie["published"] = false;
+		$categorie["seo"] = "";
+		$categorie["timestamp"] = 0;
+	}
+	if (! isset($categorie["seo"]))
+	{
+		$categorie["seo"] = "";
+	}
+	if (! isset($categorie["timestamp"]))
+	{
+		$categorie["timestamp"] = 0;
 	}
 ?><form id="frm" method="POST" action="<?php print(site_url()); ?>/admin/c/">
 	<input type="hidden" name="op" id="frmop" value="update">
@@ -170,7 +183,15 @@
 		<select name="published" id="frmpublished">
 			<option value="O"<?php print(($categorie["published"])?" selected=\"selected\"":""); ?>>Oui</option>
 			<option value="N"<?php print(($categorie["published"])?"":" selected=\"selected\""); ?>>Non</option>
-		</select>
+		</select></p>
+		<p><label for="frmseo">Page à indexer par les moteurs de recherche ?</label><br />
+		<select name="seo" id="frmseo">
+			<option value=""<?php print(("" === $categorie["seo"])?" selected=\"selected\"":""); ?>>Par défaut</option>
+			<option value="O"<?php print((true === $categorie["seo"])?" selected=\"selected\"":""); ?>>Oui</option>
+			<option value="N"<?php print((false === $categorie["seo"])?" selected=\"selected\"":""); ?>>Non</option>
+		</select></p>
+		<p>Date de dernière modification : <?php print(aaaammjjhhmmss_to_string(date("YmdHis",intval($categorie["timestamp"])))); ?></p>
+		<p>URL de sa page : <a href="<?php print(category_url($categorie_id)); ?>" target="_blank"><?php print(category_url($categorie_id)); ?></a></p>
 		<p><input type="submit" value="Enregistrer"></p>
 	</fieldset>
 </form><script type="text/javascript">

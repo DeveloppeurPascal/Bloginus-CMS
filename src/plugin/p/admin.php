@@ -55,6 +55,7 @@
 		$article["text"] = (isset($_POST["text"]))?trim($_POST["text"]):"";
 		$article["url"] = (isset($_POST["url"]))?trim($_POST["url"]):"";
 		$article["published"] = (isset($_POST["published"]) && ("O" == $_POST["published"]));
+		$article["seo"] = (isset($_POST["seo"]))?(("O" == $_POST["seo"])?true:(("N" == $_POST["seo"])?false:"")):"";
 		$article["timestamp"] = time();
 		if (false !== post_set_infos($article_id,$article))
 		{
@@ -89,6 +90,37 @@
 			else
 			{
 				$msgerreur .= "Une erreur est survenue lors de l'enregistrement de votre saisie. Une désynchronisation est possible au niveau de la liste des articles sur la catégorie.\n";
+			}
+			if (false !== ($liste = post_get_liste_feed()))
+			{
+				$ok = false;
+				reset($liste);
+				while ((list($key,$value) = each($liste)) && (! $ok))
+				{
+					if ($value["id"] == $article_id)
+					{
+						$liste[$key]["published"]=$article["published"];
+						$liste[$key]["timestamp"]=$article["timestamp"];
+						$ok = true;
+					}
+				}
+				if (! $ok)
+				{
+					$liste[] = array("id"=>$article_id, "published"=>$article["published"], "timestamp"=>$article["timestamp"]);
+				}
+			}
+			else
+			{
+				$liste = array();
+				$liste[] = array("id"=>$article_id, "published"=>$article["published"], "timestamp"=>$article["timestamp"]);
+			}
+			if (false !== post_set_liste_feed($liste))
+			{
+				$msginfo .= "La liste des articles du feed RSS a bien été mise à jour.\n";
+			}
+			else
+			{
+				$msgerreur .= "Une erreur est survenue lors de l'enregistrement de votre saisie. Une désynchronisation est possible au niveau de la liste des articles du feed RSS.\n";
 			}
 		}
 		else
@@ -167,7 +199,12 @@
 		$article["text"] = "";
 		$article["url"] = "";
 		$article["published"] = false;
+		$article["seo"] = "";
 		$article["timestamp"] = 0;
+	}
+	if (! isset($article["seo"]))
+	{
+		$article["seo"] = "";
 	}
 ?><form id="frm" method="POST" action="<?php print(site_url()); ?>/admin/p/">
 	<input type="hidden" name="op" id="frmop" value="update">
@@ -185,8 +222,15 @@
 		<select name="published" id="frmpublished">
 			<option value="O"<?php print(($article["published"])?" selected=\"selected\"":""); ?>>Oui</option>
 			<option value="N"<?php print(($article["published"])?"":" selected=\"selected\""); ?>>Non</option>
-		</select>
-		<p>Date de l'article : <?php print(aaaammjjhhmmss_to_string(date("YmdHis",intval($article["timestamp"])))); ?></p>
+		</select></p>
+		<p><label for="frmpseo">Page à indexer par les moteurs de recherche ?</label><br />
+		<select name="seo" id="frmseo">
+			<option value=""<?php print(("" === $article["seo"])?" selected=\"selected\"":""); ?>>Par défaut</option>
+			<option value="O"<?php print((true === $article["seo"])?" selected=\"selected\"":""); ?>>Oui</option>
+			<option value="N"<?php print((false === $article["seo"])?" selected=\"selected\"":""); ?>>Non</option>
+		</select></p>
+		<p>Date de dernière modification : <?php print(aaaammjjhhmmss_to_string(date("YmdHis",intval($article["timestamp"])))); ?></p>
+		<p>URL de sa page : <a href="<?php print(post_url($article_id)); ?>" target="_blank"><?php print(post_url($article_id)); ?></a></p>
 		<p><input type="submit" value="Enregistrer"></p>
 	</fieldset>
 </form><script type="text/javascript">

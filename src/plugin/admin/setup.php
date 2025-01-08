@@ -16,6 +16,25 @@
 	
 	file_put_contents(get_data_path()."/.htaccess","order deny,allow\r\ndeny from all\r\n");
 	file_put_contents(dirname(__FILE__)."/../../protected/.htaccess","order deny,allow\r\ndeny from all\r\n");
+	
+	if (false === file_exists(dirname(__FILE__)."/../../.htaccess"))
+	{
+		rename(dirname(__FILE__)."/../../htaccess.txt", dirname(__FILE__)."/../../.htaccess");
+	}
+	else if (false !== file_exists(dirname(__FILE__)."/../../htaccess.txt"))
+	{
+		$acc_pt = file_get_contents(dirname(__FILE__)."/../../.htaccess");
+		$acc_txt = file_get_contents(dirname(__FILE__)."/../../htaccess.txt");
+		if ($acc_pt === $acc_txt)
+		{
+			unlink(dirname(__FILE__)."/../../htaccess.txt");
+		}
+		else
+		{
+			print("<br>Une mise à jour du .htaccess est nécessaire, mais nous ne pouvons la faire pour vous. Veuillez comparer .htaccess et htaccess.txt présents à la racine de votre site pour les fusionner, puis supprimer le fichier htaccess.txt");
+			exit;
+		}
+	}
 
 	// setup des différents plugins
 	if ($dossier = opendir(dirname(__FILE__)."/.."))
