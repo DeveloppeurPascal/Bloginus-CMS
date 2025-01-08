@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06/2014 - 09/2017
+	// (c) Patrick Prémartin / Olf Software 06/2014 - 02/2016
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -8,7 +8,11 @@
 	$msginfo = "";
 	
 	// traitement des paramètres
-	if (isset($_POST["id"]))
+	if (isset($_POST["categorie_id"]))
+	{
+		$categorie_id = trim($_POST["categorie_id"]);
+	}
+	else if (isset($_POST["id"]))
 	{
 		$categorie_id = trim($_POST["id"]);
 	}
@@ -57,14 +61,14 @@
 				if (false !== ($liste = category_get_liste($mere_id)))
 				{
 					$ok = false;
-					foreach ($liste as $key=>$value)
+					reset($liste);
+					while ((list($key,$value) = each($liste)) && (! $ok))
 					{
 						if ($value["id"] == $categorie_id)
 						{
 							$liste[$key]["published"]=$categorie["published"];
 							$liste[$key]["timestamp"]=$categorie["timestamp"];
 							$ok = true;
-							break;
 						}
 					}
 					if (! $ok)
@@ -107,9 +111,11 @@
 			if (false !== ($liste = category_get_liste($categorie_id)))
 			{
 				$id_dispo = array("_","0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z");
-				foreach ($liste as $key=>$value)
+				reset($liste);
+				while (list($key,$value) = each($liste))
 				{
-					foreach ($id_dispo as $key2=>$value2)
+					reset($id_dispo);
+					while(list($key2,$value2)=each($id_dispo))
 					{
 						if ($categorie_id.$value2 == $value["id"])
 						{
@@ -140,6 +146,8 @@
 		}
 	}
 
+	if ("127.0.0.1" == $_SERVER["SERVER_ADDR"])
+		require_once(__DIR__."/../test/admin.php");
 ?><h2>Gestion de l'arborescence du site</h2><?php
 	// affichage du fil d'ariane
 	$ariane = "";
@@ -216,9 +224,6 @@
 		</select></p>
 		<p>Date de dernière modification : <?php print(aaaammjjhhmmss_to_string(date("YmdHis",intval($categorie["timestamp"])))); ?></p>
 		<p>URL de sa page : <a href="<?php print(category_url($categorie_id)); ?>" target="_blank"><?php print(category_url($categorie_id)); ?></a></p>
-<?php if (! $categorie["published"]) { ?>
-		<p>URL de sa page (même privée) : <a href="<?php print(category_url($categorie_id)); ?>?f=1" target="_blank"><?php print(category_url($categorie_id)); ?>?f=1</a></p>
-<?php } ?>
 		<p><input type="checkbox" value="X" name="rootpage" id="frmrootpage" <?php print((("" != config_getvar("rooturl")) && (config_getvar("rooturl")==category_url($categorie_id)))?"checked=\"checked\" ":""); ?>/><input type="hidden" name="rootpageprevious" value="<?php print((config_getvar("rooturl")==category_url($categorie_id))?"X":""); ?>" /> <label for="frmrootpage">utiliser en page d'accueil du site</label></p>
 		<p><input type="submit" value="Enregistrer"></p>
 	</fieldset>
@@ -228,13 +233,13 @@
 	});
 </script>
 <?php
-
 	// affichage de la liste des sous-categories
 	$souscategories = "<a href=\"#\" onclick=\"$('#frmop').val('catadd');$('#frm').submit();return true;\">Ajouter une sous-catégorie</a><br />";
 	$categorie_liste = category_get_liste($categorie_id);
 	if (is_array($categorie_liste))
 	{
-		foreach ($categorie_liste as $key=>$value)
+		reset($categorie_liste);
+		while (list($key,$value)=each($categorie_liste))
 		{
 			$cat = category_get_infos($value["id"]);
 			$souscategories .= "<a href=\"".site_url()."/admin/c/?id=".$value["id"]."\"><!-- ".$cat["id"]." -->".$cat["label"]."</a><br />";

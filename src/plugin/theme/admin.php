@@ -50,8 +50,9 @@
 		<legend>Choisir le thème du site</legend>
 		<p><label for="frmtheme">Thèmes disponibles</label><br />
 <?php
+	reset($theme_liste);
 	$i = 0;
-	foreach ($theme_liste as $key=>$themepropose)
+	while(list($key,$themepropose) = each($theme_liste))
 	{
 		$i++;
 		print("<input type=\"radio\" id=\"theme".$i."\" name=\"theme\" value=\"".htmlentities($themepropose,ENT_COMPAT,"UTF-8")."\"".((config_getvar("theme","bootstrap-sample") == $themepropose)?" checked=\"checked\"":"")."> <label for=\"theme".$i."\">".$themepropose."</label><br />");

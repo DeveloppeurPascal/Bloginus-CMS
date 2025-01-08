@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06/2014 - 09/2017
+	// (c) Patrick Prémartin / Olf Software 06/2014 - 02/2016
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -71,14 +71,14 @@
 			if (false !== ($liste = post_get_liste($categorie_id)))
 			{
 				$ok = false;
-				foreach ($liste as $key=>$value)
+				reset($liste);
+				while ((list($key,$value) = each($liste)) && (! $ok))
 				{
 					if ($value["id"] == $article_id)
 					{
 						$liste[$key]["published"]=$article["published"];
 						$liste[$key]["timestamp"]=$article["timestamp"];
 						$ok = true;
-						break;
 					}
 				}
 				if (! $ok)
@@ -102,14 +102,14 @@
 			if (false !== ($liste = post_get_liste_feed()))
 			{
 				$ok = false;
-				foreach ($liste as $key=>$value)
+				reset($liste);
+				while ((list($key,$value) = each($liste)) && (! $ok))
 				{
 					if ($value["id"] == $article_id)
 					{
 						$liste[$key]["published"]=$article["published"];
 						$liste[$key]["timestamp"]=$article["timestamp"];
 						$ok = true;
-						break;
 					}
 				}
 				if (! $ok)
@@ -155,10 +155,10 @@
 				while ((! $ok) && (3 <= strlen($id = post_id_create($i++,$categorie_id))-strlen($categorie_id)))
 				{
 					$trouve = false;
-					foreach ($liste as $key=>$value)
+					reset($liste);
+					while ((! $trouve) && (list($key,$value) = each($liste)))
 					{
 						$trouve = ($id == $value["id"]);
-						if ($trouve) break;
 					}
 					$ok = (! $trouve);
 				}
@@ -184,6 +184,8 @@
 		}
 	}
 
+	if ("127.0.0.1" == $_SERVER["SERVER_ADDR"])
+		require_once(__DIR__."/../test/admin.php");
 ?><h2>Gestion des articles</h2><?php	
 	// affichage du fil d'ariane
 	$ariane = "";
@@ -257,9 +259,6 @@
 		</select></p>
 		<p>Date de dernière modification : <?php print(aaaammjjhhmmss_to_string(date("YmdHis",intval($article["timestamp"])))); ?></p>
 		<p>URL de sa page : <a href="<?php print(post_url($article_id)); ?>" target="_blank"><?php print(post_url($article_id)); ?></a></p>
-<?php if (! $article["published"]) { ?>
-		<p>URL de sa page (même privée) : <a href="<?php print(post_url($article_id)); ?>?f=1" target="_blank"><?php print(post_url($article_id)); ?>?f=1</a></p>
-<?php } ?>
 		<p><input type="checkbox" value="X" name="rootpage" id="frmrootpage" <?php print((("" != config_getvar("rooturl")) && (config_getvar("rooturl")==post_url($article_id)))?"checked=\"checked\" ":""); ?>/><input type="hidden" name="rootpageprevious" value="<?php print((config_getvar("rooturl")==post_url($article_id))?"X":""); ?>" /> <label for="frmrootpage">utiliser en page d'accueil du site</label></p>
 		<p><input type="submit" value="Enregistrer"></p>
 	</fieldset>
@@ -275,7 +274,8 @@
 	$categorie_liste = category_get_liste($categorie_id);
 	if (is_array($categorie_liste))
 	{
-		foreach ($categorie_liste as $key=>$value)
+		reset($categorie_liste);
+		while (list($key,$value)=each($categorie_liste))
 		{
 			$cat = category_get_infos($value["id"]);
 			$souscategories .= "<a href=\"".site_url()."/admin/p/?categorie_id=".$value["id"]."\"><!-- ".$cat["id"]." -->".$cat["label"]."</a><br />";
@@ -288,7 +288,8 @@
 	$article_liste = post_get_liste($categorie_id);
 	if (is_array($article_liste))
 	{
-		foreach ($article_liste as $key=>$value)
+		reset($article_liste);
+		while (list($key,$value)=each($article_liste))
 		{
 			$art = post_get_infos($value["id"]);
 			$autresarticles .= "<a href=\"".site_url()."/admin/p/?categorie_id=".$categorie_id."&id=".$value["id"]."\"><!-- ".$art["id"]." -->".aaaammjjhhmmss_to_string(date("YmdHis",intval($art["timestamp"])))." - ".$art["label"]."</a><br />";

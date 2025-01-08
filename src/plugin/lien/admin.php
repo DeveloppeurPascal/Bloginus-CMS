@@ -70,14 +70,14 @@
 			if (false !== ($liste = link_get_liste($categorie_id)))
 			{
 				$ok = false;
-				foreach ($liste as $key=>$value)
+				reset($liste);
+				while ((list($key,$value) = each($liste)) && (! $ok))
 				{
 					if ($value["id"] == $lien_id)
 					{
 						$liste[$key]["published"]=$lien["published"];
 						$liste[$key]["timestamp"]=$lien["timestamp"];
 						$ok = true;
-						break;
 					}
 				}
 				if (! $ok)
@@ -115,10 +115,10 @@
 				while ((! $ok) && (3 <= strlen($id = link_id_create($i++,$categorie_id))-strlen($categorie_id)))
 				{
 					$trouve = false;
-					foreach ($liste as $key=>$value)
+					reset($liste);
+					while ((! $trouve) && (list($key,$value) = each($liste)))
 					{
 						$trouve = ($id == $value["id"]);
-						if ($trouve) break;
 					}
 					$ok = (! $trouve);
 				}
@@ -144,6 +144,8 @@
 		}
 	}
 
+	if ("127.0.0.1" == $_SERVER["SERVER_ADDR"])
+		require_once(__DIR__."/../test/admin.php");
 ?><h2>Gestion des liens</h2><?php	
 	// affichage du fil d'ariane
 	$ariane = "";
@@ -219,7 +221,8 @@
 	$categorie_liste = category_get_liste($categorie_id);
 	if (is_array($categorie_liste))
 	{
-		foreach ($categorie_liste as $key=>$value)
+		reset($categorie_liste);
+		while (list($key,$value)=each($categorie_liste))
 		{
 			$cat = category_get_infos($value["id"]);
 			$sousrubriques .= "<a href=\"".site_url()."/admin/lien/?categorie_id=".$value["id"]."\"><!-- ".$cat["id"]." -->".$cat["label"]."</a><br />";
@@ -232,7 +235,8 @@
 	$lien_liste = link_get_liste($categorie_id);
 	if (is_array($lien_liste))
 	{
-		foreach ($lien_liste as $key=>$value)
+		reset($lien_liste);
+		while (list($key,$value)=each($lien_liste))
 		{
 			$art = link_get_infos($value["id"]);
 			$autresliens .= "<a href=\"".site_url()."/admin/lien/?categorie_id=".$categorie_id."&id=".$value["id"]."\"><!-- ".$art["id"]." -->".aaaammjjhhmmss_to_string(date("YmdHis",intval($art["timestamp"])))." - ".$art["label"]."</a><br />";

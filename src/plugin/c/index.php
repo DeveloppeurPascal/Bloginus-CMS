@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06/2014 - 09/2017
+	// (c) Patrick Prémartin / Olf Software 06-08/2014
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -17,7 +17,7 @@
 	{ // catégorie inexistante
 		page404();
 	}
-	else if ((! $categorie["published"]) && (! (isset($_SESSION["user_connected"]) && ("1" == $_SESSION["user_connected"]))) && (! (isset($_GET["f"]) && ("1" == $_GET["f"]))))
+	else if ((! $categorie["published"]) && (! (isset($_SESSION["user_connected"]) && ("1" == $_SESSION["user_connected"]))))
 	{ // catégorie non publiée (sauf pour les membres connectés qui peuvent voir toutes les pages)
 		page404();
 	}
@@ -25,7 +25,7 @@
 	{ // pas d'URL pour la catégorie
 		page404();
 	}
-	else if (($categorie_url != "") && ($categorie_url != config_getvar("url").((("_"==$categorie_id) && ("_"==$elem[1]))?"/":"/c/".$elem[1])) && ($categorie_url."?f=1" != config_getvar("url").((("_"==$categorie_id) && ("_"==$elem[1]))?"/":"/c/".$elem[1])))
+	else if (($categorie_url != "") && ($categorie_url != config_getvar("url").((("_"==$categorie_id) && ("_"==$elem[1]))?"/":"/c/".$elem[1])))
 	{ // URL de la catégorie différente de celle appelée, on redirige vers la bonne
 		header("location: ".$categorie_url, true, 301);
 		exit;

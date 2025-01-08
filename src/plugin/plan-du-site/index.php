@@ -24,7 +24,8 @@
 			$souscategories = category_get_liste($id);
 			if (is_array($souscategories))
 			{
-				foreach ($souscategories as $key=>$souscat)
+				reset($souscategories);
+				while(list($key,$souscat) = each($souscategories))
 				{
 					if ($souscat["published"])
 					{

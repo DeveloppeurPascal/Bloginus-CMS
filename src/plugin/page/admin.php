@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 08/2014 - 09/2017
+	// (c) Patrick Prémartin / Olf Software 08/2014 - 02/2016
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -54,14 +54,14 @@
 			if (false !== ($liste = page_get_liste()))
 			{
 				$ok = false;
-				foreach ($liste as $key=>$value)
+				reset($liste);
+				while ((list($key,$value) = each($liste)) && (! $ok))
 				{
 					if ($value["id"] == $page_id)
 					{
 						$liste[$key]["published"]=$page["published"];
 						$liste[$key]["timestamp"]=$page["timestamp"];
 						$ok = true;
-						break;
 					}
 				}
 				if (! $ok)
@@ -101,7 +101,9 @@
 		if (false !== ($liste = page_get_liste()))
 		{
 			$id_max = 0;
-			foreach ($liste as $key=>$value)
+			reset($liste);
+			// var_dump($liste);
+			while (list($key,$value) = each($liste))
 			{
 				$id = base36_vers_entier($value["id"]);
 				// print("<p>id=".$id."</p>");
@@ -177,9 +179,6 @@
 		</select></p>
 		<p>Date de dernière modification : <?php print(aaaammjjhhmmss_to_string(date("YmdHis",intval($page["timestamp"])))); ?></p>
 		<p>URL de cette page : <a href="<?php print(page_url($page_id)); ?>" target="_blank"><?php print(page_url($page_id)); ?></a></p>
-<?php if (! $page["published"]) { ?>
-		<p>URL de sa page (même privée) : <a href="<?php print(page_url($page_id)); ?>?f=1" target="_blank"><?php print(page_url($page_id)); ?>?f=1</a></p>
-<?php } ?>
 		<p><input type="checkbox" value="X" name="rootpage" id="frmrootpage" <?php print((("" != config_getvar("rooturl")) && (config_getvar("rooturl")==page_url($page_id)))?"checked=\"checked\" ":""); ?>/><input type="hidden" name="rootpageprevious" value="<?php print((config_getvar("rooturl")==page_url($page_id))?"X":""); ?>" /> <label for="frmrootpage">utiliser en page d'accueil du site</label></p>
 		<p><input type="submit" value="Enregistrer"></p>
 	</fieldset>
@@ -194,7 +193,8 @@
 	$page_liste = page_get_liste();
 	if (is_array($page_liste))
 	{
-		foreach ($page_liste as $key=>$value)
+		reset($page_liste);
+		while (list($key,$value)=each($page_liste))
 		{
 			$pag = page_get_infos($value["id"]);
 			$autrespages .= "<a href=\"".site_url()."/admin/page/?id=".$pag["id"]."\"><!-- ".$pag["id"]." -->".aaaammjjhhmmss_to_string(date("YmdHis",intval($pag["timestamp"])))." - ".$pag["label"]."</a><br />";

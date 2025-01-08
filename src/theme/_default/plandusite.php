@@ -18,7 +18,8 @@
 					$res .= "</li>";
 					if (isset($noeud->subcat) && is_array($noeud->subcat) && (count($noeud->subcat)>0))
 					{
-						foreach ($noeud->subcat as $key=>$noeud2)
+						reset($noeud->subcat);
+						while(list($key,$noeud2) = each($noeud->subcat))
 						{
 							$res .= affiche_plan_du_site($noeud2);
 						}
@@ -31,7 +32,8 @@
 					if (isset($noeud->subcat) && is_array($noeud->subcat) && (count($noeud->subcat)>0))
 					{
 						$res .= "<ul>";
-						foreach ($noeud->subcat as $key=>$noeud2)
+						reset($noeud->subcat);
+						while(list($key,$noeud2) = each($noeud->subcat))
 						{
 							$res .= affiche_plan_du_site($noeud2);
 						}

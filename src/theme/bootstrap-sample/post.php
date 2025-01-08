@@ -8,9 +8,9 @@
 	$article_suivant = array("id"=>"");
 	$niveau = -1;
 	$sortie = false;
-	foreach ($autresarticles as $key=>$value)
+	reset($autresarticles);
+	while ((list($key,$value)=each($autresarticles)) && (! $sortie))
 	{
-		if ($sortie) break;
 		if ($value["published"])
 		{
 			if ($value["id"] != $article["id"])

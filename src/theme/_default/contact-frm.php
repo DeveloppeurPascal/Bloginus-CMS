@@ -16,7 +16,8 @@
 		if (count($destinataires)>1)
 		{
 ?><p><label for="frmdest">Choix du destinataire:</label><select name="dest" id="frmdest"><?php
-			foreach ($destinataires as $key=>$value)
+			reset($destinataires);
+			while(list($key,$value) = each($destinataires))
 			{
 ?><option value="<?php print(htmlentities($key,ENT_COMPAT,"UTF-8")); ?>"><?php print(htmlentities($key,ENT_COMPAT,"UTF-8")); ?></option><?php
 			}
@@ -24,10 +25,9 @@
 		}
 		else
 		{
-			foreach ($destinataires as $key=>$value)
-			{
+			reset($destinataires);
+			list($key,$value) = each($destinataires);
 ?><input type="hidden" name="dest" value="<?php print(htmlentities($key,ENT_COMPAT,"UTF-8")); ?>"><?php
-			}
 		}
 	}
 	else

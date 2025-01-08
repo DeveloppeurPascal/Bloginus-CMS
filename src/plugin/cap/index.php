@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 09/2014
+	// (c) Patrick Prémartin / Olf Software 09/2014 - 03/2016
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -75,7 +75,7 @@
 							}
 							break;
 						case "V" : // page vidéo
-							if ($page->url.".html" == $elem[1])
+							if (en_url($page->url).".html" == $elem[1])
 							{
 								$cap->titre = $page->titre;
 								$cap->texte_haut = $page->texte_haut;

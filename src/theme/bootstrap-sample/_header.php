@@ -43,12 +43,11 @@
 		$liste = array();
 		$liste[] = category_get_infos("_");
 		$menu = category_get_liste("_");
-		if (is_array($menu)) {
-			foreach ($menu as $key=>$value)
-			{
-				if ($value["published"])
-					$liste[] = category_get_infos($value["id"]);
-			}
+		reset($menu);
+		while (list($key,$value)=each($menu))
+		{
+			if ($value["published"])
+				$liste[] = category_get_infos($value["id"]);
 		}
 		for ($i =0; $i < count($liste); $i++)
 		{

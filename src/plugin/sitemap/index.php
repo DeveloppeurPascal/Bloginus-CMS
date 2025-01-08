@@ -30,7 +30,8 @@
 		$souscategories = category_get_liste($id);
 		if (is_array($souscategories))
 		{
-			foreach ($souscategories as $key=>$subcat)
+			reset($souscategories);
+			while(list($key,$subcat)=each($souscategories))
 			{
 				parcourt_arborescence($subcat["id"]);
 			}
@@ -38,7 +39,8 @@
 		$articles = post_get_liste($id);
 		if (is_array($articles))
 		{
-			foreach ($articles as $key=>$article)
+			reset($articles);
+			while(list($key,$article)=each($articles))
 			{
 				$article = post_get_infos($article["id"]);
 				if ($article["published"] && ((config_getvar("seo_p",false) && (! isset($article["seo"]))) || ((true === $article["seo"]) || (("" === $article["seo"]) && config_getvar("seo_p",true)))))
@@ -55,7 +57,8 @@
 	$pages = page_get_liste();
 	if (is_array($pages))
 	{
-		foreach ($pages as $key=>$page)
+		reset($pages);
+		while(list($key,$page)=each($pages))
 		{
 			$page = page_get_infos($page["id"]);
 			if ($page["published"] && ((true === $page["seo"]) || (("" === $page["seo"]) && config_getvar("seo_page",true))))
