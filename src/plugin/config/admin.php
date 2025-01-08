@@ -187,9 +187,9 @@
 		<p><label for="frmckeditor">Version de CK Editor à utiliser en administration du blog ?</label><br />
 		<select name="ckeditor_cdn" id="frmckeditor">
 			<option value=""<?php print(("" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.x.x full (CDN Olf Software)</option>
-			<option value="basic"<?php print(("basic" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.7.0 basic (CDN CK Editor)</option>
-			<option value="standard"<?php print(("standard" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.7.0 standard (CDN CK Editor)</option>
-			<option value="full"<?php print(("full" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.7.0 full (CDN CK Editor)</option>
+			<option value="basic"<?php print(("basic" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.5.6 basic (CDN CK Editor)</option>
+			<option value="standard"<?php print(("standard" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.5.6 standard (CDN CK Editor)</option>
+			<option value="full"<?php print(("full" == config_getvar("ckeditor_cdn",""))?" selected=\"selected\"":""); ?>>4.5.6 full (CDN CK Editor)</option>
 		</select></p>
 		<p><label for="frmjquery">Version de jQuery à utiliser en administration du blog ?</label><br />
 		<select name="jquery_cdn" id="frmjquery">
