@@ -37,7 +37,7 @@ Vous êtes globalement libre d'utiliser le contenu de ce dépôt de code n'impor
 * de diffuser les modifications apportées aux fichiers fournis dans ce projet sous licence AGPL (en y laissant les mentions de copyright d'origine (auteur, lien vers ce dépôt, licence) obligatoirement complétées par les vôtres)
 * de diffuser les codes sources de vos créations sous licence AGPL
 
-Si vous faites une utilisation commerciale de ce projet vous devez en acheter une licence.
+Si vous faites une utilisation commerciale de ce projet vous devez en [acheter une licence d'utilisateur final](https://bloginus-lescript.fr/c/_1_-acheter.html).
 
 Ces codes sources sont fournis en l'état sans garantie d'aucune sorte.
 

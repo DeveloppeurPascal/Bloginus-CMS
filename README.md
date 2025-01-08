@@ -37,7 +37,7 @@ You are generally free to use the contents of this code repository anywhere, pro
 * distribute the modifications made to the files supplied in this project under the AGPL license (leaving the original copyright notices (author, link to this repository, license) which must be supplemented by your own)
 * to distribute the source code of your creations under the AGPL license.
 
-If you use this project for commercial purposes, you must purchase a license.
+If you use this project for commercial purposes, you must [purchase an end user license](https://bloginus-lescript.fr/c/_1_-acheter.html).
 
 These source codes are provided as is, without warranty of any kind.
 
