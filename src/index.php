@@ -5,7 +5,7 @@
 	// http://www.bloginus-lescript.fr
 	session_start();
 	
-	define('_BloginusVersion_','1');
+	define('_BloginusVersion_','2');
 
 	// nettoyage des paramètres passés au programme
 	if (get_magic_quotes_gpc())
@@ -90,11 +90,11 @@
 	}
 	else
 	{
-		print("<br>module absent");
-		print("<br>".$_SERVER["PHP_SELF"]);
-		print("<br>".basename($_SERVER["PHP_SELF"]));
-		print("<br>".dirname($_SERVER["PHP_SELF"]));
-		print("<br>".$_SERVER["REQUEST_URI"]);
-		print("<br>".nl2br(print_r($elem,true)));
+		page404("module absent
+".$_SERVER["PHP_SELF"]."
+".basename($_SERVER["PHP_SELF"])."
+".dirname($_SERVER["PHP_SELF"])."
+".$_SERVER["REQUEST_URI"]."
+".nl2br(print_r($elem,true)));
 	}
 ?>

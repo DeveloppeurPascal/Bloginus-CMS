@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06-08/2014
+	// (c) Patrick Prémartin / Olf Software 06-09/2014
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -31,7 +31,7 @@
 	
 	// traitement des actions
 	if ("update" == $op)
-	{ // ajout ou mise à jour du contenu de la rubrique
+	{ // ajout ou mise à jour du contenu de la categorie
 		$categorie = array();
 		$categorie["id"] = $categorie_id;
 		$categorie["label"] = (isset($_POST["label"]))?trim($_POST["label"]):"";
@@ -85,7 +85,7 @@
 		}
 	}
 	else if ("catadd" == $op)
-	{ // ajout d'une sous-rubrique à la rubrique actuelle
+	{ // ajout d'une sous-categorie à la categorie actuelle
 		if (false !== ($cat = category_get_infos($categorie_id)))
 		{
 			if (false !== ($liste = category_get_liste($categorie_id)))
@@ -148,7 +148,7 @@
 		print("<p class=\"msginfo\">".nl2br($msginfo)."</p>");
 	}
 	
-	// affichage du formulaire de modification de la rubrique en cours
+	// affichage du formulaire de modification de la categorie en cours
 	if (false === ($categorie = category_get_infos($categorie_id)))
 	{
 		$categorie = array();
@@ -201,8 +201,8 @@
 </script>
 <?php
 
-	// affichage de la liste des sous-rubriques
-	$sousrubriques = "<a href=\"#\" onclick=\"$('#frmop').val('catadd');$('#frm').submit();return true;\">Ajouter une sous-catégorie</a><br />";
+	// affichage de la liste des sous-categories
+	$souscategories = "<a href=\"#\" onclick=\"$('#frmop').val('catadd');$('#frm').submit();return true;\">Ajouter une sous-catégorie</a><br />";
 	$categorie_liste = category_get_liste($categorie_id);
 	if (is_array($categorie_liste))
 	{
@@ -210,10 +210,10 @@
 		while (list($key,$value)=each($categorie_liste))
 		{
 			$cat = category_get_infos($value["id"]);
-			$sousrubriques .= "<a href=\"".site_url()."/admin/c/?id=".$value["id"]."\">".$cat["id"]." - ".$cat["label"]."</a><br />";
+			$souscategories .= "<a href=\"".site_url()."/admin/c/?id=".$value["id"]."\"><!-- ".$cat["id"]." -->".$cat["label"]."</a><br />";
 		}
 	}
-?><div id="sousrubriques"><p>Sous rubriques de la rubriques en cours:<br /><?php print($sousrubriques); ?></p></div>
+?><div id="souscategories"><p>Sous categories de la categorie en cours:<br /><?php print($souscategories); ?></p></div>
 <ul>
 	<li><a href="<?php print(site_url()); ?>/admin/">Retour au menu principal</a></li>
 </ul>

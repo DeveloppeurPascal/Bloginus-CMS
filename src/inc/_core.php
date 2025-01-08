@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06-08/2014
+	// (c) Patrick Prémartin / Olf Software 06-09/2014
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -178,7 +178,7 @@
 	}
 	function fichier_inclure($nom_fichier)
 	{
-		global $categorie_id, $categorie, $souscategories, $autresarticles, $article_id, $article, $plandusite, $titre_page;
+		global $categorie_id, $categorie, $souscategories, $autresarticles, $article_id, $article, $plandusite, $titre_page, $page;
 
 		$theme = config_getvar("theme","_default");
 		if (file_exists(dirname(__FILE__)."/../theme/".$theme."/".$nom_fichier))
@@ -198,10 +198,14 @@
 			require_once(dirname(__FILE__)."/../theme/_default/404.php");
 		}
 	}
-	function page404()
+	function page404($log="")
 	{
 		header('HTTP/1.0 404 Not Found', true, 404);
 		fichier_inclure("404.php");
+		if ("" != $log)
+		{
+			print("<!-- ".nl2br($log)." -->");
+		}
 		exit;
 	}
 
@@ -273,5 +277,48 @@
 	function aaaammjjhhmmss_to_string ($date)
 	{
 		return substr ($date, 6, 2)."/".substr ($date, 4, 2)."/".substr ($date, 0, 4)." ".substr ($date, 8, 2).":".substr ($date, 10, 2).":".substr ($date, 12, 2);
+	}
+	
+	function liste_parametres($elem,$indice)
+	{
+		$res = "";
+		for ($i = $indice; $i < count($elem); $i++)
+		{
+			$res .= ((""!=$res)?"/":"").$elem[$i];
+		}
+		return $res;
+	}
+
+	// verifie_email
+	//		contrôle la validité d'une adresse email (format et existence du domaine correspondant)
+	function verifie_email($email2)
+	{
+		$email = strtolower($email2);
+		if (strlen($email) < 6)
+		{
+			return $email2." : Email trop court";
+		}
+		if (strlen($email) > 255)
+		{
+			return $email2." : Email trop long";
+		}
+		if (!@ereg("@",$email))
+		{
+			return $email2." : Le email n'a pas d'arobase (@)";
+		}
+		if (preg_match_all("/([^a-zA-Z0-9_\@\.\-])/i", $email, $trouve))
+		{
+			return $email2." :  caractère(s) interdit dans un email (".implode(", ",$trouve[0]).").";
+		}
+		if (!preg_match("/^([a-zA-Z0-9_]|\\-|\\.)+@(([a-zA-Z0-9_]|\\-)+\\.)+[a-zA-Z]{2,4}\$/i", $email))
+		{
+			return $email2." : n'est pas un email valide.";
+		}
+		list($compte,$domaine)=split("@",$email,2);
+		if ((function_exists (checkdnsrr)) && (!checkdnsrr($domaine,"MX")))
+		{
+			return $email2." : Ce domaine (".$domaine.") n'accepte pas les emails";
+		}
+		return $email2;
 	}
 ?>

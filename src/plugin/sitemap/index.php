@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06-08/2014
+	// (c) Patrick Prémartin / Olf Software 08-09/2014
 	//
 	// http://www.bloginus-lescript.fr
 	
@@ -22,7 +22,7 @@
 		$categorie = category_get_infos($id);
 		if (is_array($categorie))
 		{
-			if ($categorie["published"] && ((config_getvar("seo_c",false) && (! isset($categorie["seo"]))) || ((true === $categorie["seo"]) || (("" === $categorie["seo"]) && config_getvar("seo_c",false)))))
+			if ($categorie["published"] && ((config_getvar("seo_c",false) && (! isset($categorie["seo"]))) || ((true === $categorie["seo"]) || (("" === $categorie["seo"]) && config_getvar("seo_c",true)))))
 			{
 				ajoute_url(category_url($id),(isset($categorie["timestamp"]))?$categorie["timestamp"]:0);
 			}
@@ -42,7 +42,8 @@
 			reset($articles);
 			while(list($key,$article)=each($articles))
 			{
-				if ($article["published"] && ((config_getvar("seo_p",false) && (! isset($article["seo"]))) || ((true === $article["seo"]) || (("" === $article["seo"]) && config_getvar("seo_p",false)))))
+				$article = post_get_infos($article["id"]);
+				if ($article["published"] && ((config_getvar("seo_p",false) && (! isset($article["seo"]))) || ((true === $article["seo"]) || (("" === $article["seo"]) && config_getvar("seo_p",true)))))
 				{
 					ajoute_url(post_url($article["id"]),(isset($article["timestamp"]))?$article["timestamp"]:0);
 				}
@@ -53,4 +54,17 @@
 ?><<?php print("?"); ?>xml version="1.0" encoding="UTF-8"<?php print("?"); ?>>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><?php
 	parcourt_arborescence("_");
+	$pages = page_get_liste();
+	if (is_array($pages))
+	{
+		reset($pages);
+		while(list($key,$page)=each($pages))
+		{
+			$page = page_get_infos($page["id"]);
+			if ($page["published"] && ((true === $page["seo"]) || (("" === $page["seo"]) && config_getvar("seo_page",true))))
+			{
+				ajoute_url(page_url($page["id"]),(isset($page["timestamp"]))?$page["timestamp"]:0);
+			}
+		}
+	}
 ?></urlset>

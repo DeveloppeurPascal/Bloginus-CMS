@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 07/2014
+	// (c) Patrick Prémartin / Olf Software 07-08/2014
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -97,6 +97,13 @@
 		config_setvar("seo_p", $seop);
 		$msginfo .= "Le prérenseignement de l'indexation des pages a été mise à jour.\n";
 	}
+	$seopage = true;
+	if (isset($_POST["seopage"]))
+	{
+		$seopage = (isset($_POST["seopage"]) && ("O" == $_POST["seopage"]));
+		config_setvar("seo_page", $seopage);
+		$msginfo .= "Le prérenseignement de l'indexation des pages a été mise à jour.\n";
+	}
 
 ?><h2>Configuration du site</h2><?php
 	if ("" != $msgerreur)
@@ -128,10 +135,15 @@
 			<option value="O"<?php print((config_getvar("seo_c",false))?" selected=\"selected\"":""); ?>>Oui</option>
 			<option value="N"<?php print((config_getvar("seo_c",false))?"":" selected=\"selected\""); ?>>Non</option>
 		</select></p>
-		<p><label for="frmseop">Par défaut, indexer les pages dans les moteurs de recherche ?</label><br />
+		<p><label for="frmseop">Par défaut, indexer les pages d'articles dans les moteurs de recherche ?</label><br />
 		<select name="seop" id="frmseop">
 			<option value="O"<?php print((config_getvar("seo_p",true))?" selected=\"selected\"":""); ?>>Oui</option>
 			<option value="N"<?php print((config_getvar("seo_p",true))?"":" selected=\"selected\""); ?>>Non</option>
+		</select></p>
+		<p><label for="frmseopage">Par défaut, indexer les pages indépendantes dans les moteurs de recherche ?</label><br />
+		<select name="seopage" id="frmseopage">
+			<option value="O"<?php print((config_getvar("seo_page",true))?" selected=\"selected\"":""); ?>>Oui</option>
+			<option value="N"<?php print((config_getvar("seo_page",true))?"":" selected=\"selected\""); ?>>Non</option>
 		</select></p>
 		<p><input type="submit" value="Enregistrer"></p>
 	</fieldset>

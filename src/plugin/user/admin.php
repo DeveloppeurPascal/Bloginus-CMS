@@ -136,7 +136,7 @@
 ?><ul>
 	<li><a href="<?php print(site_url()); ?>/admin/">Retour au menu principal</a></li>
 </ul>
-<iframe id="pub728x90" src="http://adserver.ma-regie-publicitaire.com/publicite-iframe.php?c=496&i=1471984084&verif=badcd55bdb57780c38f6062ca4033807&t=_blank" width="728" height="90" align="top" frameborder="0" marginheight="0" marginwidth="0" scrolling="no"></iframe><?php
+<div id="pub728x90"><iframe src="http://adserver.ma-regie-publicitaire.com/publicite-iframe.php?c=496&i=1471984084&verif=badcd55bdb57780c38f6062ca4033807&t=_blank" width="728" height="90" align="top" frameborder="0" marginheight="0" marginwidth="0" scrolling="no"></iframe></div><?php
 	}
 	else if (isset($_SESSION["user_connected"]) && ("1" == $_SESSION["user_connected"]))
 	{ // affichage des pages en cas d'utilisateur connecté
@@ -192,6 +192,6 @@
 		<p><input type="submit" value="Me connecter"></p>
 	</fieldset>
 </form>
-<iframe id="pub728x90" src="http://adserver.ma-regie-publicitaire.com/publicite-iframe.php?c=496&i=1471984084&verif=badcd55bdb57780c38f6062ca4033807&t=_blank" width="728" height="90" align="top" frameborder="0" marginheight="0" marginwidth="0" scrolling="no"></iframe><?php
+<div id="pub728x90"><iframe src="http://adserver.ma-regie-publicitaire.com/publicite-iframe.php?c=496&i=1471984084&verif=badcd55bdb57780c38f6062ca4033807&t=_blank" width="728" height="90" align="top" frameborder="0" marginheight="0" marginwidth="0" scrolling="no"></iframe></div><?php
 	}
 ?>

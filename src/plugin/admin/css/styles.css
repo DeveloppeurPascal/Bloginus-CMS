@@ -45,7 +45,8 @@ a:hover {
 	background-color: #333333;
 }
 
-.msgerreur {
+.msgerreur,
+.msgErreur {
 	color: #880000;
 	background-color: #ffdddd;
 	font-weight: bold;
@@ -60,7 +61,8 @@ a:hover {
 	border-style: solid;
 }
 
-.msginfo {
+.msginfo,
+.msgInfo {
 	color: #008800;
 	background-color: #ddffdd;
 	font-weight: bold;
@@ -96,12 +98,12 @@ label {
 #fildariane a:hover {
 }
 
-#sousrubriques {
+#souscategories {
 	margin: 1em;
 }
-#sousrubriques a {
+#souscategories a {
 }
-#sousrubriques a:hover {
+#souscategories a:hover {
 }
 
 #autresarticles {
@@ -111,12 +113,25 @@ label {
 }
 #autresarticles a:hover {
 }
+
 #pub728x90 {
-	width:100%;
-	height:90px;
-	margin-top:0.5em;
-	margin-bottom:0.5em;
-	margin-left:auto;
-	margin-right:auto;
-	text-align:center;
+	width: 100%;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	text-align: center;
+}
+#pub728x90 iframe {
+	width: 728px;
+	height: 90px;
+	margin-left: auto;
+	margin-right: auto;
+}
+textarea {
+	width: 100%;
+}
+input[type="text"] {
+	width: 100%;
+}
+input[type="email"] {
+	width: 100%;
 }

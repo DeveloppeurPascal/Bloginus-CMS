@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06-08/2014
+	// (c) Patrick Prémartin / Olf Software 06-09/2014
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -129,7 +129,7 @@
 		}
 	}
 	else if ("postadd" == $op)
-	{ // ajout d'un article à la rubrique actuelle
+	{ // ajout d'un article à la categorie actuelle
 		if (false !== ($cat = category_get_infos($categorie_id)))
 		{
 			if (false !== ($liste = post_get_liste($categorie_id)))
@@ -153,7 +153,7 @@
 				}
 				else
 				{
-					$msgerreur .= "Ajout d'article impossible : vous avez déjà le nombre maximal d'articles dans cette rubrique.\n";
+					$msgerreur .= "Ajout d'article impossible : vous avez déjà le nombre maximal d'articles dans cette categorie.\n";
 				}
 			}
 			else
@@ -190,7 +190,7 @@
 		print("<p class=\"msginfo\">".nl2br($msginfo)."</p>");
 	}
 
-	// affichage du formulaire de modification de la rubrique en cours
+	// affichage du formulaire de modification de la categorie en cours
 	if (false === ($article = post_get_infos($article_id)))
 	{
 		$article = array();
@@ -240,8 +240,8 @@
 </script>
 <?php
 
-	// affichage de la liste des sous-rubriques
-	$sousrubriques = "";
+	// affichage de la liste des sous-categories
+	$souscategories = "";
 	$categorie_liste = category_get_liste($categorie_id);
 	if (is_array($categorie_liste))
 	{
@@ -249,10 +249,10 @@
 		while (list($key,$value)=each($categorie_liste))
 		{
 			$cat = category_get_infos($value["id"]);
-			$sousrubriques .= "<a href=\"".site_url()."/admin/p/?categorie_id=".$value["id"]."\">".$cat["id"]." - ".$cat["label"]."</a><br />";
+			$souscategories .= "<a href=\"".site_url()."/admin/p/?categorie_id=".$value["id"]."\"><!-- ".$cat["id"]." -->".$cat["label"]."</a><br />";
 		}
 	}
-?><div id="sousrubriques"><p>Sous rubriques de la rubriques en cours:<br /><?php print($sousrubriques); ?></p></div><?php
+?><div id="souscategories"><p>Sous categories de la categorie en cours:<br /><?php print($souscategories); ?></p></div><?php
 
 	// affichage de la liste des articles de la même catégorie
 	$autresarticles = "<a href=\"#\" onclick=\"$('#frmop').val('postadd');$('#frm').submit();return true;\">Ajouter un article</a><br />";
@@ -263,10 +263,10 @@
 		while (list($key,$value)=each($article_liste))
 		{
 			$art = post_get_infos($value["id"]);
-			$autresarticles .= "<a href=\"".site_url()."/admin/p/?categorie_id=".$categorie_id."&id=".$value["id"]."\">".$art["id"]." - ".aaaammjjhhmmss_to_string(date("YmdHis",intval($art["timestamp"])))." - ".$art["label"]."</a><br />";
+			$autresarticles .= "<a href=\"".site_url()."/admin/p/?categorie_id=".$categorie_id."&id=".$value["id"]."\"><!-- ".$art["id"]." -->".aaaammjjhhmmss_to_string(date("YmdHis",intval($art["timestamp"])))." - ".$art["label"]."</a><br />";
 		}
 	}
-?><div id="autresarticles"><p>Autres articles de la rubriques en cours:<br /><?php print($autresarticles); ?></p></div>
+?><div id="autresarticles"><p>Autres articles de la categorie en cours:<br /><?php print($autresarticles); ?></p></div>
 <ul>
 	<li><a href="<?php print(site_url()); ?>/admin/">Retour au menu principal</a></li>
 </ul>

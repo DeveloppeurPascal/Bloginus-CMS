@@ -53,4 +53,31 @@
 ?></ul></div><?php
 		}
 	}
+	$liens = link_get_liste($categorie["id"]);
+	if (isset($liens) && is_array($liens) && $categorie["published"])
+	{
+		$visible = false;
+		$liste = array();
+		reset($liens);
+		while (list($key,$value)=each($liens))
+		{
+			if ($value["published"])
+				$liste[] = link_get_infos($value["id"]);
+		}
+		for ($i =0; $i < count($liste); $i++)
+		{
+			if (! $visible)
+			{
+				$visible = true;
+?><div id="urlListSB">
+<h2>Liens</h2>
+<ul><?php
+			}
+?><li><a href="<?php print($liste[$i]["url"]); ?>"><?php print(htmlentities($liste[$i]["label"],ENT_COMPAT,"UTF-8")); ?></a></li><?php
+		}
+		if ($visible)
+		{
+?></ul></div><?php
+		}
+	}
 ?>
