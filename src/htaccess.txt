@@ -1,0 +1,3 @@
+AllowOverride all
+RewriteEngine on
+RewriteRule (.*) index.php
