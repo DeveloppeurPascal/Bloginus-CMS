@@ -1,6 +1,6 @@
 <?php
 	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 09/2014
+	// (c) Patrick Prémartin / Olf Software 09-10/2014
 	//
 	// http://www.bloginus-lescript.fr
 
@@ -41,6 +41,10 @@
 	else if ($i > 0)
 	{
 		$msgerreur .= "Veuillez renseigner au moins un destinataire du formulaire de contact.\n";
+	}
+	else
+	{
+		$destinataires = config_getvar("contact-destinataires",array());
 	}
 ?><h2>Configuration du formulaire de contact du site</h2><?php
 	if ("" != $msgerreur)

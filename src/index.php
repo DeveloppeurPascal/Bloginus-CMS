@@ -5,7 +5,7 @@
 	// http://www.bloginus-lescript.fr
 	session_start();
 	
-	define('_BloginusVersion_','2');
+	define('_BloginusVersion_','3');
 
 	// nettoyage des paramètres passés au programme
 	if (get_magic_quotes_gpc())
