@@ -13,7 +13,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Bloginus CMS</title>
-<meta name="author" content="(c) Patrick Premartin / Olf Software 06/2014 - 01/2015">
+<meta name="author" content="(c) 2014-2025 Patrick Premartin / Olf Software">
 <meta name="Robots" content="noindex,nofollow">
 <meta http-equiv="Content-Language" content="fr">
 <link rel="stylesheet" type="text/css" href="<?php print(site_url()); ?>/css/admin/styles.css">
