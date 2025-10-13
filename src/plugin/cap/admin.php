@@ -131,7 +131,11 @@
 		$msgInfo .= "Mise à jour enregistrée.\n";
 	}
 ?><h2>Gestion de pack "Club Affiliation Pro"</h2>
-<p>Ce module est destiné aux membres du <a href="https://vasur.fr/clubaffiliationpro" target="_blank">Club Affiliation Pro</a>. Retrouvez toutes les informations sur le forum du club.</p><?php
+<p><strong>The Club Affiliation Pro is closed since more than 5 years now. Videos are not available online anymore.<br>
+This extension is deprecated and won't be maintained in future releases.<br>
+It will stay in Bloginus CMS core plugins for compatibility with existing websites in case you use it for an other things than the Club Affiliation Pro.</strong></p>
+<hr>
+<p>Ce module est destiné aux membres du Club Affiliation Pro. Retrouvez toutes les informations sur le forum du club.</p><?php
 	if ("" != $msgErreur)
 	{
 		print("<p class=\"msgErreur\">".nl2br($msgErreur)."</p>");
