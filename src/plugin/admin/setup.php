@@ -2,7 +2,7 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 06/2014-07/2015
 	//
-	// https://www.bloginus-lescript.fr
+	// https://bloginus.olfsoftware.fr
 
 	require_once(dirname(__FILE__)."/_header.php");
 	// création de la clé si elle n'existe pas

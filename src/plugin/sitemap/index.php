@@ -2,7 +2,7 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 08-09/2014
 	//
-	// https://www.bloginus-lescript.fr
+	// https://bloginus.olfsoftware.fr
 	
 	function ajoute_url($url,$timestamp)
 	{

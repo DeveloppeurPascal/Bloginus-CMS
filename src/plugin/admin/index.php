@@ -2,7 +2,7 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 06/2014
 	//
-	// https://www.bloginus-lescript.fr
+	// https://bloginus.olfsoftware.fr
 
 	$elem = bloginus_getvar("param");
 	require_once(dirname(__FILE__)."/_header.php");

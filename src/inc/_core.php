@@ -2,7 +2,7 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 06/2014 - 01/2016
 	//
-	// https://www.bloginus-lescript.fr
+	// https://bloginus.olfsoftware.fr
 
 	// **********          **********          **********          **********          **********          **********
 	// * use those functions if you want to make a new theme or plugin
@@ -333,7 +333,7 @@
 		}
 		else
 		{
-			$res .= "https://www.bloginus-lescript.fr/";
+			$res .= "https://bloginus.olfsoftware.fr/";
 		}
 		$res .= "\" target=\"_blank\">Bloginus</a>";
 		return $res;

@@ -2,7 +2,7 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 01/2016
 	//
-	// https://www.bloginus-lescript.fr
+	// https://bloginus.olfsoftware.fr
 	print("<p>Forçage du thème &quot;Bootstrap-Sample&quot; en tant que thème par défaut si aucun autre n'est indiqué.<br />");
 	if ("" == config_getvar("theme",""))
 	{

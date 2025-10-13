@@ -2,7 +2,7 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 03/2016
 	//
-	// https://www.bloginus-lescript.fr
+	// https://bloginus.olfsoftware.fr
 
 	$elem = bloginus_getvar("param");
 	if ((2 <= count($elem)) && ("fonts" == $elem[0]))
