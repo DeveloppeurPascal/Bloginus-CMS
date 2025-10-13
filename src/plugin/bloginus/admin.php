@@ -35,5 +35,5 @@ Bloginus est en version : <?php print($version2); ?></p><?php
 <p>Pour utiliser, paramétrer et adapter <strong>Bloginus</strong>, rendez-vous sur la <a href="https://bloginus.olfsoftware.fr/c/_2-mode-d-emploi.html">documentation en ligne</a>.</p>
 <p>Une <a href="https://bloginus.olfsoftware.fr/c/_3-themes.html">documentation sur les thèmes</a> y est également disponible. Vous pourrez également y trouver une sélection de thèmes clés en main si le thème par défaut ne vous inspire pas trop (ce que nous pouvons comprendre).</p>
 <h2>Copyright</h2>
-<p><strong>Bloginus</strong> a été initialement développé par <a href="https://patrick.premartin.fr">Patrick Prémartin</a> à l'été 2014 pour le compte de la société <a href="https://www.olfsoftware.fr">Olf Software</a>. Il est disponible à la vente pour tout le monde depuis <a href="https://bloginus.olfsoftware.fr/c/_1_-acheter.html">cette page</a>.</p>
+<p><strong>Bloginus</strong> a été initialement développé par <a href="https://patrick.premartin.fr">Patrick Prémartin</a> à l'été 2014 pour le compte de la société <a href="https://olfsoftware.fr">Olf Software</a>. Il est disponible à la vente pour tout le monde depuis <a href="https://bloginus.olfsoftware.fr/c/_1_-acheter.html">cette page</a>.</p>
 <p></p>
