@@ -1,4 +1,17 @@
 <?php
+	// Bloginus CMS
+	// (c) 2014-2025 Patrick Prémartin / Olf Software
+	//
+	// This project is distributed under the AGPLv3 license.
+	//
+	// Go to this website for the documentation, download latest release,
+	// buying a developer pro license or contacting us :
+	// https://bloginus.olfsoftware.fr
+
+	// **************************************************
+	// * thème par défaut, ne pas modifier ce fichier
+	// **************************************************
+	
 	if (
 		(isset($article) && is_array($article) && isset($article["text"]) && (stripos($article["text"],"</code></pre>") !== FALSE))
 		|| (isset($page) && is_array($page) && isset($page["text"]) && (stripos($page["text"],"</code></pre>") !== FALSE))

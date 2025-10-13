@@ -1,5 +1,17 @@
 <?php
-	// thème par défaut, ne pas modifier ce fichier
+	// Bloginus CMS
+	// (c) 2014-2025 Patrick Prémartin / Olf Software
+	//
+	// This project is distributed under the AGPLv3 license.
+	//
+	// Go to this website for the documentation, download latest release,
+	// buying a developer pro license or contacting us :
+	// https://bloginus.olfsoftware.fr
+
+	// **************************************************
+	// * thème par défaut, ne pas modifier ce fichier
+	// **************************************************
+	
 ?></div><div id="sidebar"><?php
 	fichier_inclure("_sidebar.php");
 ?></div><div class="clear"></div></div><div id="footer"><p><a href="<?php print(site_url()); ?>/plan-du-site/">Plan du site</a><?php

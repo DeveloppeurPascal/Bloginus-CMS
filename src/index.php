@@ -1,8 +1,13 @@
 <?php
-	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06/2014 - 03/2016
+	// Bloginus CMS
+	// (c) 2014-2025 Patrick Prémartin / Olf Software
 	//
+	// This project is distributed under the AGPLv3 license.
+	//
+	// Go to this website for the documentation, download latest release,
+	// buying a developer pro license or contacting us :
 	// https://bloginus.olfsoftware.fr
+
 	session_start();
 	
 	define('_BloginusVersion_','7'); // Version 7 en cours de développement.

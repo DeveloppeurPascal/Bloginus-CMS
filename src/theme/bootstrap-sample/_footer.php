@@ -1,4 +1,18 @@
-        </div><!-- /.blog-main -->
+<?php
+	// Bloginus CMS
+	// (c) 2014-2025 Patrick Prémartin / Olf Software
+	//
+	// This project is distributed under the AGPLv3 license.
+	//
+	// Go to this website for the documentation, download latest release,
+	// buying a developer pro license or contacting us :
+	// https://bloginus.olfsoftware.fr
+
+	// **************************************************
+	// * thème par défaut, ne pas modifier ce fichier
+	// **************************************************
+	
+?></div><!-- /.blog-main -->
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar"><?php
 	// bloc d'info en haut de sidebar
 	if (isset($categorie) && is_array($categorie) && $categorie["published"])

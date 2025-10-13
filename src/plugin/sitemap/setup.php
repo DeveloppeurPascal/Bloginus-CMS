@@ -1,8 +1,13 @@
 <?php
-	// Bloginus
-	// (c) Patrick Prémartin / Olf Software 06-08/2014
+	// Bloginus CMS
+	// (c) 2014-2025 Patrick Prémartin / Olf Software
 	//
+	// This project is distributed under the AGPLv3 license.
+	//
+	// Go to this website for the documentation, download latest release,
+	// buying a developer pro license or contacting us :
 	// https://bloginus.olfsoftware.fr
+
 	print("<p>Déclaration de votre sitemap aux moteurs de recherche.<br />");
 	$robots_filename = dirname(__FILE__)."/../../robots.txt";
 	$robots_sitemap = "Sitemap: ".config_getvar("url","https://".$_SERVER["HTTP_HOST"].site_url())."/sitemap/";
