@@ -5,7 +5,7 @@
 	// https://bloginus.olfsoftware.fr
 	session_start();
 	
-	define('_BloginusVersion_','5');
+	define('_BloginusVersion_','7'); // Version 7 en cours de développement.
 
 	// nettoyage des paramètres passés au programme
 	if (get_magic_quotes_gpc())
