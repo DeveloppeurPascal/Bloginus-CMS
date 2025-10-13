@@ -2,7 +2,7 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 06-08/2014
 	//
-	// http://www.bloginus-lescript.fr
+	// https://www.bloginus-lescript.fr
 
 	$elem = bloginus_getvar("param");
 	$categorie_id = "";

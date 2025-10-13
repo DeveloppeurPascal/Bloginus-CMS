@@ -2,7 +2,7 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 09/2014 - 03/2016
 	//
-	// http://www.bloginus-lescript.fr
+	// https://www.bloginus-lescript.fr
 
 	$elem = bloginus_getvar("param");
 	if ((3 <= count($elem)) && ("images" == $elem[1]))

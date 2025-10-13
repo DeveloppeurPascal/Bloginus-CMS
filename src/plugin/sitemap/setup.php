@@ -2,10 +2,10 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 06-08/2014
 	//
-	// http://www.bloginus-lescript.fr
+	// https://www.bloginus-lescript.fr
 	print("<p>Déclaration de votre sitemap aux moteurs de recherche.<br />");
 	$robots_filename = dirname(__FILE__)."/../../robots.txt";
-	$robots_sitemap = "Sitemap: ".config_getvar("url","http://".$_SERVER["HTTP_HOST"].site_url())."/sitemap/";
+	$robots_sitemap = "Sitemap: ".config_getvar("url","https://".$_SERVER["HTTP_HOST"].site_url())."/sitemap/";
 	if (false === file_exists($robots_filename))
 	{
 		file_put_contents($robots_filename,$robots_sitemap."\r\n");

@@ -2,7 +2,7 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 09/2014
 	//
-	// http://www.bloginus-lescript.fr
+	// https://www.bloginus-lescript.fr
 
 	$msgErreur = "";
 	$gogo = isset($_POST["gogo"])?trim(strip_tags($_POST["gogo"])):"";

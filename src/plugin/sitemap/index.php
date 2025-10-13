@@ -2,7 +2,7 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 08-09/2014
 	//
-	// http://www.bloginus-lescript.fr
+	// https://www.bloginus-lescript.fr
 	
 	function ajoute_url($url,$timestamp)
 	{
@@ -52,7 +52,7 @@
 	}
 	header("content-type: application/xml");
 ?><<?php print("?"); ?>xml version="1.0" encoding="UTF-8"<?php print("?"); ?>>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><?php
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"><?php
 	parcourt_arborescence("_");
 	$pages = page_get_liste();
 	if (is_array($pages))

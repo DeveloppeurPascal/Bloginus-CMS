@@ -2,7 +2,7 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 07/2014 - 02/2016
 	//
-	// http://www.bloginus-lescript.fr
+	// https://www.bloginus-lescript.fr
 
 	$msgerreur = "";
 	$msginfo = "";
@@ -156,7 +156,7 @@
 		<p><label for="frmlangue">Langue du site</label><br />
 		<input type="text" name="langue" id="frmlangue" value="<?php print(htmlentities(config_getvar("langue","fr"),ENT_COMPAT,"UTF-8")); ?>"></p>
 		<p><label for="frmurl">Adresse</label><br />
-		<input type="text" name="url" id="frmurl" value="<?php print(htmlentities(config_getvar("url","http://".$_SERVER["HTTP_HOST"].site_url()),ENT_COMPAT,"UTF-8")); ?>"></p>
+		<input type="text" name="url" id="frmurl" value="<?php print(htmlentities(config_getvar("url","https://".$_SERVER["HTTP_HOST"].site_url()),ENT_COMPAT,"UTF-8")); ?>"></p>
 		<p><label for="frmannee">Année de lancement du site</label><br />
 		<input type="text" name="annee" id="frmannee" value="<?php print(htmlentities(config_getvar("annee",date("Y")),ENT_COMPAT,"UTF-8")); ?>"></p>
 		<p><label for="frmrooturl">Adresse de la page d'accueil (facultatif, par défaut ce sera la rubrique racine du blog)</label><br />
@@ -198,7 +198,7 @@
 			<option value="google"<?php print(("google" == config_getvar("jquery_cdn",""))?" selected=\"selected\"":""); ?>>1.12.0 (CDN Google)</option>
 			<option value="microsoft"<?php print(("microsoft" == config_getvar("jquery_cdn",""))?" selected=\"selected\"":""); ?>>1.12.0 (CDN Microsoft)</option>
 		</select></p>
-		<p><label for="frm1tpe">Pseudo d'affilié <a href="http://vasur.fr/1tpe" target="_blank">1TPE</a> (utilisé sur le "powered by" en pied de page des thèmes)</label><br />
+		<p><label for="frm1tpe">Pseudo d'affilié <a href="https://vasur.fr/1tpe" target="_blank">1TPE</a> (utilisé sur le "powered by" en pied de page des thèmes)</label><br />
 		<input type="text" name="1tpe_pseudo" id="frm1tpe" value="<?php print(htmlentities(config_getvar("1tpe_pseudo",""),ENT_COMPAT,"UTF-8")); ?>"></p>
 		<p><label for="frmabstractonoff">Permettre la saisie d'un chapeau/extrait/abstract au niveau des rubriques, pages, articles et liens ?</label><br />
 		<select name="saisieabstract" id="frmabstractonoff">

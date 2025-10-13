@@ -2,7 +2,7 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 03/2016
 	//
-	// http://www.bloginus-lescript.fr
+	// https://www.bloginus-lescript.fr
 	$elem = bloginus_getvar("param");
 	// var_dump($elem);exit;
 	if (("ajax" == $elem[0]) && ("admin" == $elem[1]) && (4 <= count($elem)))

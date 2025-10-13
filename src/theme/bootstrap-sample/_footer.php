@@ -103,7 +103,7 @@
 			?> - <a href="<?php print(site_url()); ?>/contact/">Nous contacter</a><?php
 		}
 	  ?><br />
-	  <?php print(bloginus_powered_by()); ?> &amp; <a href="http://getbootstrap.com">Bootstrap</a> (adapté depuis un thème de <a href="https://twitter.com/mdo">@mdo</a>)<br />
+	  <?php print(bloginus_powered_by()); ?> &amp; <a href="https://getbootstrap.com">Bootstrap</a> (adapté depuis un thème de <a href="https://twitter.com/mdo">@mdo</a>)<br />
 	  &copy; <?php print(htmlentities(config_getvar("auteur"),ENT_COMPAT,"UTF-8")." ".($annee = config_getvar("annee",date("Y"))).((date("Y") > $annee)?"-".date("Y"):"")); ?></p>
       <p><a href="#">Retour en haut de page</a></p>
     </footer>

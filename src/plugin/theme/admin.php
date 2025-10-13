@@ -2,7 +2,7 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 07/2014 - 01/2016
 	//
-	// http://www.bloginus-lescript.fr
+	// https://www.bloginus-lescript.fr
 
 	$msgerreur = "";
 	$msginfo = "";

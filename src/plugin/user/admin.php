@@ -2,7 +2,7 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 07/2014-01/2016
 	//
-	// http://www.bloginus-lescript.fr
+	// https://www.bloginus-lescript.fr
 
 	$msgerreur = "";
 	$msginfo = "";
@@ -210,8 +210,8 @@
 		else if (isset($_GET["dspchglnp"]))
 		{
 ?><form method="POST" action="<?php print(site_url()); ?>/admin/user/?dspchglnp=1">
-	<p>Afin de sécuriser vos accès au site, même sur un ordinateur qui n'est pas le vôtre, vous pouvez activer la double authentification par <a href="http://www.lognpass.fr" target="_blank">Log'n Pass</a>.</p>
-	<p>Avant cela vous devez avoir téléchargé et installé le logiciel gratuit <a href="http://www.lognpass.fr" target="_blank">Log'n Pass</a> qui vous fournira un code d'accès unique à chaque connexion au site.</p>
+	<p>Afin de sécuriser vos accès au site, même sur un ordinateur qui n'est pas le vôtre, vous pouvez activer la double authentification par <a href="https://www.lognpass.fr" target="_blank">Log'n Pass</a>.</p>
+	<p>Avant cela vous devez avoir téléchargé et installé le logiciel gratuit <a href="https://www.lognpass.fr" target="_blank">Log'n Pass</a> qui vous fournira un code d'accès unique à chaque connexion au site.</p>
 	<fieldset>
 		<legend>Changement de la phrase mystère</legend>
 		<p><label for="frmlnpp">Nouvelle phrase mystère</label><br />
@@ -269,7 +269,7 @@
 		<input type="password" name="password" id="frmpassword"></p><?php
 	if (file_exists(get_data_path()."/lognpass.dta"))
 	{
-?><p style="background-image:url(<?php print(site_url()); ?>/images/admin/lognpass-32x32.png);background-repeat:no-repeat;padding-left:35px;"><label for="frmlnpk">Code d'accès <a href="http://www.lognpass.fr" target="_blank">Log'n Pass</a></label><br />
+?><p style="background-image:url(<?php print(site_url()); ?>/images/admin/lognpass-32x32.png);background-repeat:no-repeat;padding-left:35px;"><label for="frmlnpk">Code d'accès <a href="https://www.lognpass.fr" target="_blank">Log'n Pass</a></label><br />
 <input type="text" name="lognpass_key" id="frmlnpk"></p><?php
 	}
 ?><p><input type="submit" value="Me connecter"></p>

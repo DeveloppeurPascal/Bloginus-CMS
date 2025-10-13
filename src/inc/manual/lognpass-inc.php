@@ -55,7 +55,7 @@
 		$password_ok = false;
 		$nb = intval(substr($password,0,1));
 		$api_num = substr($password,$nb+1);
-		$data = @file_get_contents("http://".$api_num.".lognpass.net/get/");
+		$data = @file_get_contents("https://".$api_num.".lognpass.net/get/");
 		if ("" != $data)
 		{
 			if (is_object($api = json_decode($data)))

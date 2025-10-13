@@ -2,7 +2,7 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 06/2014 - 02/2016
 	//
-	// http://www.bloginus-lescript.fr
+	// https://www.bloginus-lescript.fr
 
 	$liste = array();
 	$categorie_id = (! isset($_GET["c"]))?"":$_GET["c"]; // catégorie dont on veut les sous-categories

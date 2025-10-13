@@ -2,7 +2,7 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 09/2014-06/2015
 	//
-	// http://www.bloginus-lescript.fr
+	// https://www.bloginus-lescript.fr
 
 	$msgErreur = "";
 	$msgInfo = "";
@@ -131,7 +131,7 @@
 		$msgInfo .= "Mise à jour enregistrée.\n";
 	}
 ?><h2>Gestion de pack "Club Affiliation Pro"</h2>
-<p>Ce module est destiné aux membres du <a href="http://vasur.fr/clubaffiliationpro" target="_blank">Club Affiliation Pro</a>. Retrouvez toutes les informations sur le forum du club.</p><?php
+<p>Ce module est destiné aux membres du <a href="https://vasur.fr/clubaffiliationpro" target="_blank">Club Affiliation Pro</a>. Retrouvez toutes les informations sur le forum du club.</p><?php
 	if ("" != $msgErreur)
 	{
 		print("<p class=\"msgErreur\">".nl2br($msgErreur)."</p>");

@@ -2,11 +2,11 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 06/2014-06/2015
 	//
-	// http://www.bloginus-lescript.fr
+	// https://www.bloginus-lescript.fr
 
 	header("content-type: application/atom+xml");	
 ?><<?php print("?"); ?>xml version="1.0" encoding="UTF-8"<?php print("?"); ?>>
-<feed xmlns="http://www.w3.org/2005/Atom">
+<feed xmlns="https://www.w3.org/2005/Atom">
 	<title><![CDATA[<?php print(htmlentities(config_getvar("titre"),ENT_COMPAT,"UTF-8")); ?>]]></title>
 	<link href="<?php print(config_getvar("url")); ?>" />
 	<updated><?php print(date(DATE_ATOM)); ?></updated>

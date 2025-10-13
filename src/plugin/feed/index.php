@@ -2,7 +2,7 @@
 	// Bloginus
 	// (c) Patrick Prémartin / Olf Software 06/2014-06/2015
 	//
-	// http://www.bloginus-lescript.fr
+	// https://www.bloginus-lescript.fr
 
 	header("content-type: application/rss+xml");	
 ?><<?php print("?"); ?>xml version="1.0" encoding="UTF-8"<?php print("?"); ?>>
