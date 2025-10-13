@@ -326,15 +326,17 @@
 	function bloginus_powered_by()
 	{
 		$res = "Powered by <a href=\"";
-		$pseudo = trim(strip_tags(config_getvar("1tpe_pseudo","")));
-		if ($pseudo != "")
-		{
-			$res .= "https://go.".$pseudo.".olfsoft.2.1tpe.net";
-		}
-		else
-		{
+		// The affiliate program has closed in January 2025 with the opening of our source code on GitHub.
+		//
+		// $pseudo = trim(strip_tags(config_getvar("1tpe_pseudo","")));
+		// if ($pseudo != "")
+		// {
+			// $res .= "https://go.".$pseudo.".olfsoft.2.1tpe.net";
+		// }
+		// else
+		// {
 			$res .= "https://bloginus.olfsoftware.fr/";
-		}
+		// }
 		$res .= "\" target=\"_blank\">Bloginus</a>";
 		return $res;
 	}
