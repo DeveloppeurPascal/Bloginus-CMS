@@ -18,15 +18,23 @@ Customization, APIs and operation are detailed on the Bloginus website.
 
 Follow my development streams of software, video games, mobile applications and websites on [my Twitch channel](https://www.twitch.tv/patrickpremartin) or as replays on [Serial Streameur](https://serialstreameur.fr) mostly in French.
 
-## Using Bloginus
+## Using this script
 
-[Visit the software website](https://bloginus.olfsoftware.fr) to find out more about how it works, access videos and articles, find out about the different versions available and their features, contact user support...
+Copy the files from the ./src subfolder to your site location (root of a domain, subdomain, or subfolder of an existing site).
 
-Commercial licenses can also be [purchased from the site](https://bloginus-lescript.fr/c/_1_-acheter.html).
+You can also [visit the script website](https://bloginus.olfsoftware.fr) to find out more about how it works, access videos and articles, find out about the different versions available and their features, contact user support...
 
 ## Source code installation
 
 To download this code repository, we recommend using "git", but you can also download a ZIP file directly from [its GitHub repository](https://github.com/DeveloppeurPascal/Bloginus-CMS).
+
+## Compatibility
+
+When I code, I work locally with XAMPP on Windows. My projects work for this stack.
+
+There's no guarantee of compatibility with other software or versions, even though I try to keep my code clean and avoid using too many specific things.
+
+If you detect any anomalies on earlier versions, please don't hesitate to [report them](https://github.com/DeveloppeurPascal/Bloginus-CMS/issues) so that I can test and try to correct or provide a workaround.
 
 ## License to use this code repository and its contents
 
@@ -37,7 +45,7 @@ You are generally free to use the contents of this code repository anywhere, pro
 * distribute the modifications made to the files supplied in this project under the AGPL license (leaving the original copyright notices (author, link to this repository, license) which must be supplemented by your own)
 * to distribute the source code of your creations under the AGPL license.
 
-If you use this project for commercial purposes, you must [purchase an end user license](https://bloginus-lescript.fr/c/_1_-acheter.html).
+If this license doesn't suit your needs, you can purchase the right to use this project under the [Apache License 2.0](https://choosealicense.com/licenses/apache-2.0/) or a dedicated commercial license ([contact the author](https://trucs-de-developpeur-web.fr/nous-contacter.php) to explain your needs).
 
 These source codes are provided as is, without warranty of any kind.
 
@@ -53,13 +61,15 @@ You also can fork the repository and contribute by submitting pull requests if y
 
 ## Support the project and its author
 
-If you think this project is useful and want to support it, please make a donation to [its author](https://github.com/DeveloppeurPascal). It will help to maintain the code and binaries.
+If you think this project is useful and want to support it, please make a donation to [its author](https://github.com/DeveloppeurPascal). It will help to maintain this project and all others.
 
 You can use one of those services :
 
 * [GitHub Sponsors](https://github.com/sponsors/DeveloppeurPascal)
-* [Liberapay](https://liberapay.com/PatrickPremartin)
+* Ko-fi [in French](https://ko-fi.com/patrick_premartin_fr) or [in English](https://ko-fi.com/patrick_premartin_en)
 * [Patreon](https://www.patreon.com/patrickpremartin)
-* [Paypal](https://www.paypal.com/paypalme/patrickpremartin)
+* [Liberapay](https://liberapay.com/PatrickPremartin)
 
-or if you speack french you can [subscribe to Zone Abo](https://zone-abo.fr/nos-abonnements.php) on a monthly or yearly basis and get a lot of resources as videos and articles.
+You can buy an end user license for [my softwares](https://lic.olfsoftware.fr/products.php?lng=en) and [my video games](https://lic.gamolf.fr/products.php?lng=en) or [a developer license for my libraries](https://lic.developpeur-pascal.fr/products.php?lng=en) if you use them in your projects.
+
+I'm also available as a service provider to help you use this or other projects, such as software development, mobile applications and websites. [Contact me](https://vasur.fr/about) to discuss.
