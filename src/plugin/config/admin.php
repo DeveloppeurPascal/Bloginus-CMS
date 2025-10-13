@@ -125,11 +125,12 @@
 		}
 		$msginfo .= "La version utilisée de jQuery a été mise à jour a été mise à jour.\n";
 	}
-	if (isset($_POST["1tpe_pseudo"]))
-	{
-		config_setvar("1tpe_pseudo", trim(strip_tags($_POST["1tpe_pseudo"])));
-		$msginfo .= "Votre pseudo d'affilié chez 1TPE a été mis à jour.\n";
-	}
+	// The 1TPE affiliate program has closed.
+	// if (isset($_POST["1tpe_pseudo"]))
+	// {
+		// config_setvar("1tpe_pseudo", trim(strip_tags($_POST["1tpe_pseudo"])));
+		// $msginfo .= "Votre pseudo d'affilié chez 1TPE a été mis à jour.\n";
+	// }
 	if (isset($_POST["saisieabstract"]))
 	{
 		config_setvar("saisieabstract", (isset($_POST["saisieabstract"]) && ("O" == $_POST["saisieabstract"])));
@@ -197,10 +198,11 @@
 			<option value="jquery"<?php print(("jquery" == config_getvar("jquery_cdn",""))?" selected=\"selected\"":""); ?>>1.12.0 (CDN jQuery)</option>
 			<option value="google"<?php print(("google" == config_getvar("jquery_cdn",""))?" selected=\"selected\"":""); ?>>1.12.0 (CDN Google)</option>
 			<option value="microsoft"<?php print(("microsoft" == config_getvar("jquery_cdn",""))?" selected=\"selected\"":""); ?>>1.12.0 (CDN Microsoft)</option>
-		</select></p>
-		<p><label for="frm1tpe">Pseudo d'affilié <a href="https://vasur.fr/1tpe" target="_blank">1TPE</a> (utilisé sur le "powered by" en pied de page des thèmes)</label><br />
-		<input type="text" name="1tpe_pseudo" id="frm1tpe" value="<?php print(htmlentities(config_getvar("1tpe_pseudo",""),ENT_COMPAT,"UTF-8")); ?>"></p>
-		<p><label for="frmabstractonoff">Permettre la saisie d'un chapeau/extrait/abstract au niveau des rubriques, pages, articles et liens ?</label><br />
+		</select></p><?php
+		// The 1TPE affiliate program has closed.
+		// <p><label for="frm1tpe">Pseudo d'affilié <a href="https://vasur.fr/1tpe" target="_blank">1TPE</a> (utilisé sur le "powered by" en pied de page des thèmes)</label><br />
+		// <input type="text" name="1tpe_pseudo" id="frm1tpe" value="<?php print(htmlentities(config_getvar("1tpe_pseudo",""),ENT_COMPAT,"UTF-8")); ? >"></p>
+?><p><label for="frmabstractonoff">Permettre la saisie d'un chapeau/extrait/abstract au niveau des rubriques, pages, articles et liens ?</label><br />
 		<select name="saisieabstract" id="frmabstractonoff">
 			<option value="O"<?php print((config_getvar("saisieabstract",true))?" selected=\"selected\"":""); ?>>Oui</option>
 			<option value="N"<?php print((config_getvar("saisieabstract",true))?"":" selected=\"selected\""); ?>>Non</option>
