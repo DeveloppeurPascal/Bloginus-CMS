@@ -340,4 +340,3 @@
 		$res .= "\" target=\"_blank\">Bloginus</a>";
 		return $res;
 	}
-?>

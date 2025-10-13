@@ -83,4 +83,3 @@
 		$PAGE_LISTE = $liste;
 		return file_put_contents(creer_dossier(page_path())."/pages.dta",serialize($PAGE_LISTE));
 	}
-?>

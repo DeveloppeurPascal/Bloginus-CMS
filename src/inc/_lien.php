@@ -80,4 +80,3 @@
 	{
 		return $categorie_id.entier_vers_base36($num,3);
 	}
-?>

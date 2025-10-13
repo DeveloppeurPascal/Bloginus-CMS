@@ -7,4 +7,3 @@
 	print(config_getvar("contact-merci","<p class=\"msgInfo\">Votre message a bien été envoyé. Nous vous répondrons dès que possible.</p>"));
 ?></div><?php
 	fichier_inclure("_footer.php");
-?>

@@ -42,4 +42,3 @@
 ?></ul>
           </nav><?php
 	fichier_inclure("_footer.php");
-?>

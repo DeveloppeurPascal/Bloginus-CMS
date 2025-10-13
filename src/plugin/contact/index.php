@@ -50,4 +50,3 @@ Message :
 		}
 		fichier_inclure("contact-frm.php");
 	}
-?>

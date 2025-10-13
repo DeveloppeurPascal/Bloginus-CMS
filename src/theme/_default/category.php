@@ -19,4 +19,3 @@
 	}
 ?></div><?php
 	fichier_inclure("_footer.php");
-?>

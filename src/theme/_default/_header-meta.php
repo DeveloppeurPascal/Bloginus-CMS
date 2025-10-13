@@ -69,4 +69,3 @@
 	{
 ?><link rel="apple-touch-icon" sizes="180x180" href="<?php print(htmlentities(config_getvar("url","https://".$_SERVER["HTTP_HOST"].site_url()),ENT_COMPAT,"UTF-8")); ?>/apple-touch-icon.png"><?php
 	}
-?>

@@ -5,4 +5,3 @@
 	// https://bloginus.olfsoftware.fr
 
 	header("location: https://bloginus.olfsoftware.fr");
-?>

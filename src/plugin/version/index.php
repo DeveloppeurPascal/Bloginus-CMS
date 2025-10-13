@@ -5,4 +5,3 @@
 	// https://bloginus.olfsoftware.fr
 
 	print(version_load());
-?>

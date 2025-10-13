@@ -38,4 +38,3 @@
 		$autresarticles = post_get_liste($categorie_id);
 		fichier_inclure("post.php");
 	}
-?>

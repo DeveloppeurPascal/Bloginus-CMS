@@ -43,4 +43,3 @@
 			fichier_inclure("category.php");
 		}
 	}
-?>

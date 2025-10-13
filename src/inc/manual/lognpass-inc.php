@@ -77,4 +77,3 @@
 		}
 		return $password_ok;
 	}
-?>

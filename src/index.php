@@ -127,4 +127,3 @@
 ".$_SERVER["REQUEST_URI"]."
 ".nl2br(print_r($elem,true)));
 	}
-?>

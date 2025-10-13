@@ -96,4 +96,3 @@
 		$CATEGORY_LISTE[$id] = $liste;
 		return file_put_contents(creer_dossier(category_path($id))."/categories.dta",serialize($CATEGORY_LISTE[$id]));
 	}
-?>

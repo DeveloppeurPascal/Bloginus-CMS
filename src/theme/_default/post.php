@@ -7,4 +7,3 @@
 	<div id="postDate">Mis à jour le <?php print(aaaammjjhhmmss_to_string(date("YmdHis",intval($article["timestamp"])))); ?></div>
 </div><?php
 	fichier_inclure("_footer.php");
-?>

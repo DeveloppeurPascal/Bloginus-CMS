@@ -12,4 +12,3 @@
 <div class="bloc_video"><?php print($cap->video_script); ?></div>
 <div class="bloc_txt_bas"><?php print($cap->texte_bas); ?></div><?php
 	require_once(dirname(__FILE__)."/_bas.php");
-?>

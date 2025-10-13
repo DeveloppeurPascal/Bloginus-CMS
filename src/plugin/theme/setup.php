@@ -8,4 +8,3 @@
 	{
 		config_setvar("theme", "bootstrap-sample");
 	}
-?>

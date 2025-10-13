@@ -3,4 +3,3 @@
 	
 	$article = $page;
 	fichier_inclure("post.php");
-?>

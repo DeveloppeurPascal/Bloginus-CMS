@@ -68,4 +68,3 @@
 	print("<br>mise a jour terminee, tout est ok");
 	print("<br><a href=\"".site_url()."/admin/index.php\">administrer ce script</a>");
 	require_once(dirname(__FILE__)."/_footer.php");
-?>

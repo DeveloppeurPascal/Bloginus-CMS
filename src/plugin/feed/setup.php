@@ -7,4 +7,3 @@
 	@unlink(creer_dossier(get_data_path())."/posts-all.dta");
 	feed_regenerer_liste();
 	print("<p>Génération de la liste des articles du site pour les interactions avec les modules \"feed\" et \"atom\".</p>");
-?>

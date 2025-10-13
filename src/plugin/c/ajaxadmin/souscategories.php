@@ -31,4 +31,3 @@
 	}
 	print(json_encode($liste));
 	exit;
-?>

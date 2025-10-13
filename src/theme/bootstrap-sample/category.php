@@ -17,4 +17,3 @@
 		}
 	}
 	fichier_inclure("_footer.php");
-?>

@@ -45,4 +45,3 @@
 	print(config_getvar("contact-bas"));
 ?></form></div><?php
 	fichier_inclure("_footer.php");
-?>

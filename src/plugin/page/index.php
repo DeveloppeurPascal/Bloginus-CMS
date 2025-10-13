@@ -36,4 +36,3 @@
 	{
 		fichier_inclure("page.php");
 	}
-?>

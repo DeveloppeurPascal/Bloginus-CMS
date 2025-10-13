@@ -276,4 +276,3 @@
 	</fieldset>
 </form><?php
 	}
-?>

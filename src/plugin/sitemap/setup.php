@@ -25,4 +25,3 @@
 		}
 	}
 	print("Fin de la mise à jour pour le sitemap. <strong>Assurez-vous que le lien indiqué après \"sitemap:\" fonctionne correctement.</strong></p>");
-?>

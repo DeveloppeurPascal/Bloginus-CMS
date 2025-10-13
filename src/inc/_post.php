@@ -152,4 +152,3 @@
 			post_set_liste_feed($feed);
 		}
 	}
-?>

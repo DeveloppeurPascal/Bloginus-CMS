@@ -39,4 +39,3 @@
 		require_once(dirname(__FILE__)."/../user/admin.php");
 	}
 	require_once(dirname(__FILE__)."/_footer.php");
-?>

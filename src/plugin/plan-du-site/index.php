@@ -39,4 +39,3 @@
 	
 	$plandusite = construit_plan_du_site("_");
 	fichier_inclure("plandusite.php");
-?>
