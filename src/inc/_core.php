@@ -341,6 +341,6 @@
 		// {
 			$res .= "https://bloginus.olfsoftware.fr/";
 		// }
-		$res .= "\" target=\"_blank\">Bloginus</a>";
+		$res .= "\" target=\"_blank\">Bloginus CMS</a>";
 		return $res;
 	}

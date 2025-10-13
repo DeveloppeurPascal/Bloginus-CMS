@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Bloginus</title>
+<title>Bloginus CMS</title>
 <meta name="author" content="(c) Patrick Premartin / Olf Software 06/2014 - 01/2015">
 <meta name="Robots" content="noindex,nofollow">
 <meta http-equiv="Content-Language" content="fr">
@@ -49,4 +49,4 @@
 <script type="text/javascript" src="<?php print($ckeditor_url); ?>adapters/jquery.js"></script>
 </head>
 <body>
-<h1>Bloginus</h1>
+<h1>Bloginus CMS</h1>
