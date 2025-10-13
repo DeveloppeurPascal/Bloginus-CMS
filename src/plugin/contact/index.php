@@ -39,7 +39,7 @@ Expéditeur :
 Objet : ".$sujet."
 
 Message :
-".$message,"From: <".$email.">\nReply-To: <".$email.">\n");
+".$message,"From: <".$email.">\r\nReply-To: <".$email.">\r\n");
 		fichier_inclure("contact-ok.php");
 	}
 	else
