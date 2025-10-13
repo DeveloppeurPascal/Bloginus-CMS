@@ -53,7 +53,7 @@
 	print($robots);
 ?>" />
 <meta http-equiv="Content-Language" content="<?php print(htmlentities(config_getvar("langue","fr"),ENT_COMPAT,"UTF-8")); ?>" />
-<link rel="alternate" href="<?php print(htmlentities(config_getvar("url","https://".$_SERVER["HTTP_HOST"].site_url()),ENT_COMPAT,"UTF-8")); ?>" hreflang="<?php print(htmlentities(config_getvar("langue","fr"),ENT_COMPAT,"UTF-8")); ?>" />
+<link rel="alternate" href="<?php print(htmlentities(config_getvar("url","https://".$_SERVER["HTTP_HOST"].site_url()),ENT_COMPAT,"UTF-8")); ?>" hreflang="x-default" />
 <link rel="alternate" type="application/rss+xml" title="Toutes les actus (RSS)" href="<?php print(htmlentities(config_getvar("url","https://".$_SERVER["HTTP_HOST"].site_url()),ENT_COMPAT,"UTF-8")); ?>/feed/" />
 <link rel="alternate" type="application/atom+xml" title="Toutes les actus (Atom)" href="<?php print(htmlentities(config_getvar("url","https://".$_SERVER["HTTP_HOST"].site_url()),ENT_COMPAT,"UTF-8")); ?>/atom/" />
 <?php
